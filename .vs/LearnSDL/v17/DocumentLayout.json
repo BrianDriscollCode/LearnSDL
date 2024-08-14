@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\LearnSDL\\LearnSDL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\LearnSDL\\LearnSDL\\LearnSDL\\InitSDL.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|solutionrelative:LearnSDL\\InitSDL.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InitSDL.cpp",
+              "DocumentMoniker": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\LearnSDL\\LearnSDL\\LearnSDL\\InitSDL.cpp",
+              "RelativeDocumentMoniker": "LearnSDL\\InitSDL.cpp",
+              "ToolTip": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\LearnSDL\\LearnSDL\\LearnSDL\\InitSDL.cpp",
+              "RelativeToolTip": "LearnSDL\\InitSDL.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADYAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-14T04:29:40.489Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
