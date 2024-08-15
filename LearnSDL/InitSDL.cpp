@@ -1,6 +1,8 @@
 
 #include <SDL.h>
 #include <stdio.h>
+#include <iostream>
+using namespace std;
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 600;
@@ -93,14 +95,35 @@ int main(int argc, char* args[])
         }
         else
         {
-            //Apply the image
-            SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
 
-            //Update the surface
-            SDL_UpdateWindowSurface(gWindow);
+            bool quit = false;
+
+            SDL_Event e;
+
+            while (!quit)
+            {
+
+                while (SDL_PollEvent(&e) != 0)
+                {
+                    //User requests quit
+                    if (e.type == SDL_QUIT)
+                    {
+                        cout << "test";
+                        quit = true;
+                    }
+                }
+
+                //Apply the image
+                SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
+
+                //Update the surface
+                SDL_UpdateWindowSurface(gWindow);
+
+            }
+            
 
             //Hack to get window to stay up
-            SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; } }
+            //SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; } }
         }
     }
 

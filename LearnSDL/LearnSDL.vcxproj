@@ -74,9 +74,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Brian\Desktop\LearnC++\libraries\SDL2-devel-2.30.6-VC\SDL2-2.30.6\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\brian\OneDrive\Desktop\engine_projects\LearnSDL\libraries\SDL2-2.30.6\include;$(IncludePath)</IncludePath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>C:\Users\Brian\Desktop\LearnC++\libraries\SDL2-devel-2.30.6-VC\SDL2-2.30.6\lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\brian\OneDrive\Desktop\engine_projects\LearnSDL\libraries\SDL2-2.30.6\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
