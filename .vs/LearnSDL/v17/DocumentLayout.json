@@ -3,30 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Downloads\\04_key_presses\\04_key_presses\\Initializer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|solutionrelative:LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Loaders\\SurfaceLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|solutionrelative:LearnSDL\\Engine\\Systems\\Loaders\\SurfaceLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Downloads\\04_key_presses\\04_key_presses\\Initializer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|solutionrelative:LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|solutionrelative:LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{D5779C37-C3D7-48C5-B6A4-9CD4805822CB}|LearnSDL\\LearnSDL.vcxproj|solutionrelative:LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Brian\\Downloads\\05_optimized_surface_loading_and_soft_stretching (1)\\05_optimized_surface_loading_and_soft_stretching\\05_optimized_surface_loading_and_soft_stretching.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,24 +21,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 226,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "InputHandler.cpp",
               "DocumentMoniker": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.cpp",
               "RelativeDocumentMoniker": "LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.cpp",
               "ToolTip": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.cpp",
               "RelativeToolTip": "LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-17T06:47:46.424Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "InputHandler.h",
               "DocumentMoniker": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.h",
               "RelativeDocumentMoniker": "LearnSDL\\Engine\\Systems\\Handlers\\InputHandler.h",
@@ -65,86 +50,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Initializer.cpp",
               "DocumentMoniker": "C:\\Users\\Brian\\Downloads\\04_key_presses\\04_key_presses\\Initializer.cpp",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Downloads\\04_key_presses\\04_key_presses\\Initializer.cpp",
               "ToolTip": "C:\\Users\\Brian\\Downloads\\04_key_presses\\04_key_presses\\Initializer.cpp",
               "RelativeToolTip": "..\\..\\..\\..\\Downloads\\04_key_presses\\04_key_presses\\Initializer.cpp",
-              "ViewState": "AQIAAJAAAAAAAAAAAAAAAIsAAAAmAAAA",
+              "ViewState": "AQIAAKgAAAAAAAAAAAAAALwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-17T06:00:59.052Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "a833dd84-d2fa-4167-89df-8d2a1502c77d",
-        "Display": 1,
-        "X": 330,
-        "Y": 82,
-        "Width": 1558,
-        "Height": 792,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 3,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "05_optimized_surface_loading_and_soft_stretching.cpp",
-              "DocumentMoniker": "C:\\Users\\Brian\\Downloads\\05_optimized_surface_loading_and_soft_stretching (1)\\05_optimized_surface_loading_and_soft_stretching\\05_optimized_surface_loading_and_soft_stretching.cpp",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\Downloads\\05_optimized_surface_loading_and_soft_stretching (1)\\05_optimized_surface_loading_and_soft_stretching\\05_optimized_surface_loading_and_soft_stretching.cpp",
-              "ToolTip": "C:\\Users\\Brian\\Downloads\\05_optimized_surface_loading_and_soft_stretching (1)\\05_optimized_surface_loading_and_soft_stretching\\05_optimized_surface_loading_and_soft_stretching.cpp",
-              "RelativeToolTip": "..\\..\\..\\..\\Downloads\\05_optimized_surface_loading_and_soft_stretching (1)\\05_optimized_surface_loading_and_soft_stretching\\05_optimized_surface_loading_and_soft_stretching.cpp",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAAAKEAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-17T06:30:03.369Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "WindowHandler.cpp",
-              "DocumentMoniker": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.cpp",
-              "RelativeDocumentMoniker": "LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.cpp",
-              "ToolTip": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.cpp",
-              "RelativeToolTip": "LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-17T06:39:23.363Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "WindowHandler.h",
-              "DocumentMoniker": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.h",
-              "RelativeDocumentMoniker": "LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.h",
-              "ToolTip": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.h",
-              "RelativeToolTip": "LearnSDL\\Engine\\Systems\\Handlers\\WindowHandler.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-17T06:39:36.46Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SurfaceLoader.cpp",
-              "DocumentMoniker": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Loaders\\SurfaceLoader.cpp",
-              "RelativeDocumentMoniker": "LearnSDL\\Engine\\Systems\\Loaders\\SurfaceLoader.cpp",
-              "ToolTip": "C:\\Users\\Brian\\Desktop\\LearnC\u002B\u002B\\ParentSDLProject\\LearnSDL\\LearnSDL\\Engine\\Systems\\Loaders\\SurfaceLoader.cpp",
-              "RelativeToolTip": "LearnSDL\\Engine\\Systems\\Loaders\\SurfaceLoader.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-17T06:20:56.868Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-17T06:00:59.052Z"
             }
           ]
         }
