@@ -1,3 +1,10 @@
-﻿  InputHandler.cpp
-  LINK : C:\Users\Brian\Desktop\LearnC++\ParentSDLProject\LearnSDL\x64\Debug\LearnSDL.exe not found or not built by the last incremental link; performing full link
+﻿  LearnSDL.cpp
+  InputHandler.cpp
+  GameTest.cpp
+  WindowHandler.cpp
+C:\Users\Brian\Desktop\LearnC++\ParentSDLProject\LearnSDL\LearnSDL\Engine\Systems\Handlers\WindowHandler.cpp(15,68): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Brian\Desktop\LearnC++\ParentSDLProject\LearnSDL\LearnSDL\Engine\Systems\Handlers\WindowHandler.cpp(15,68): message : placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+  MediaLoader.cpp
+  SurfaceLoader.cpp
+  Generating Code...
   LearnSDL.vcxproj -> C:\Users\Brian\Desktop\LearnC++\ParentSDLProject\LearnSDL\x64\Debug\LearnSDL.exe
