@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Downloads\04_key_presses\04_key_presses\LearnSDL.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
+    <ClCompile Include="LearnSDL.cpp" />
     <ClCompile Include="Project\GameTest.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\WindowHandler.cpp" />
     <ClCompile Include="Engine\Systems\Loaders\MediaLoader.cpp" />
