@@ -41,9 +41,6 @@
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GL_renderer\from_scratch\src\tools\camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Systems\Loaders\MediaLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
