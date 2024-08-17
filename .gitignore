@@ -3,3 +3,12 @@
 *.user
 *.log
 *.db
+*.obj
+*.exe
+*.ilk
+*.idb
+*.pdb
+*.log
+*.tlog
+*.recipe
+x64/Debug/
