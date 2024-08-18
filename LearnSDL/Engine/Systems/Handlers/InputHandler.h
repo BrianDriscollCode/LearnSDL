@@ -9,10 +9,11 @@ public:
     ~InputHandler();
 
     // Poll events and handle them
-    void handleEvents(bool& quit, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces);
+    void handleEvents(bool& quit, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces, SDL_Event e);
 
 private:
     void handleKeyPress(SDL_Keycode key, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces);
+    
 };
 
 #endif

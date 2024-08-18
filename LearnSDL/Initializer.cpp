@@ -2,10 +2,12 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 #include "../Engine/Systems/Loaders/SurfaceLoader.h"
 #include "../Engine/Systems/Handlers/InputHandler.h"
 #include "../Engine/Systems/Handlers/WindowHandler.h"
+#include "../Engine/Systems/Managers/EventManager.h"
 
 
 //Screen dimension constants
@@ -175,8 +177,24 @@ int main(int argc, char* args[]) {
 
 			InputHandler inputHandler;
 
+			SDL_Event e;
+			EventManager eventManager;
+
+			eventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
+				if (event.key.keysym.sym == SDLK_UP)
+				{
+					printf("up key presssed!");
+				}
+			});
+
 			while (!quit) {
-				inputHandler.handleEvents(quit, currentSurface, gKeyPressSurfaces, KEY_PRESS_SURFACE_TOTAL);
+
+				while (SDL_PollEvent(&e) != 0)
+				{
+					eventManager.processEvent(e);
+					inputHandler.handleEvents(quit, currentSurface, gKeyPressSurfaces, KEY_PRESS_SURFACE_TOTAL, e);
+				}
+
 				windowHandler.fitImageToScreen(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT, currentSurface, gScreenSurface);
 			}
 		}

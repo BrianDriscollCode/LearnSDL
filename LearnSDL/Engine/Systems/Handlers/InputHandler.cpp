@@ -1,4 +1,5 @@
 #include "InputHandler.h"
+#include "../Managers/EventManager.h"
 
 InputHandler::InputHandler() {
     // Constructor logic if needed
@@ -8,16 +9,33 @@ InputHandler::~InputHandler() {
     // Destructor logic if needed
 }
 
-void InputHandler::handleEvents(bool& quit, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces) {
-    SDL_Event e;
-    while (SDL_PollEvent(&e) != 0) {
-        if (e.type == SDL_QUIT) {
-            quit = true;
+EventManager eventManager;
+
+void InputHandler::handleEvents(bool& quit, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces, SDL_Event e) {
+    
+
+    /*EventManager eventManager;
+
+    eventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
+        if (event.key.keysym.sym == SDLK_UP)
+        {
+            printf("up key presssed!");
         }
-        else if (e.type == SDL_KEYDOWN) {
-            handleKeyPress(e.key.keysym.sym, currentSurface, surfaces, totalSurfaces);
-        }
+        });*/
+
+    if (e.type == SDL_QUIT) {
+        quit = true;
     }
+    else if (e.type == SDL_KEYDOWN) {
+        handleKeyPress(e.key.keysym.sym, currentSurface, surfaces, totalSurfaces);
+    }
+
+    /*while (SDL_PollEvent(&e) != 0) {
+
+        eventManager.processEvent(e);
+
+        
+    }*/
 }
 
 void InputHandler::handleKeyPress(SDL_Keycode key, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces) {
