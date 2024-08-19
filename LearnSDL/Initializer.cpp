@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 
+//Systems Manager
+#include "../Engine/Systems/SystemManager.h"
+
 #include "../Engine/Systems/Loaders/SurfaceLoader.h"
 #include "../Engine/Systems/Handlers/InputHandler.h"
 #include "../Engine/Systems/Handlers/WindowHandler.h"
@@ -17,12 +20,12 @@ const int SCREEN_HEIGHT = 900;
 //Key press surfaces constants
 enum KeyPressSurfaces
 {
-	KEY_PRESS_SURFACE_DEFAULT,
-	KEY_PRESS_SURFACE_UP,
-	KEY_PRESS_SURFACE_DOWN,
-	KEY_PRESS_SURFACE_LEFT,
-	KEY_PRESS_SURFACE_RIGHT,
-	KEY_PRESS_SURFACE_TOTAL
+	DEFAULT,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	TOTAL
 };
 
 //Starts up SDL and creates window
@@ -38,7 +41,7 @@ void close();
 SDL_Window* gWindow = NULL;
 
 //The images that correspond to a keypress
-SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
+SDL_Surface* gKeyPressSurfaces[ TOTAL ];
 
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
@@ -48,11 +51,8 @@ SDL_Surface* gStretchedSurface = NULL;
 
 
 // Load Systems
-// 
-//*Loaders
-SurfaceLoader surfaceLoader;
-//*Handlers
-WindowHandler windowHandler;
+//
+SystemManager systemManager;
 
 bool init()
 {
@@ -60,7 +60,7 @@ bool init()
 	bool success = true;
 
 	// Handles window creation logic
-	gWindow = windowHandler.createWindow(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
+	gWindow = systemManager.windowHandler.createWindow(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	if (gWindow == NULL)
 	{
@@ -77,13 +77,15 @@ bool init()
 
 bool loadMedia()
 {
+
+	SurfaceLoader& surfaceLoader = systemManager.surfaceLoader;
 	//Loading success flag
 	bool success = true;
 
 	//Load default surface
-	gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = surfaceLoader.loadSurface( "Assets/keys/press.bmp", gScreenSurface );
+	gKeyPressSurfaces[ DEFAULT ] = surfaceLoader.loadSurface( "Assets/keys/press.bmp", gScreenSurface );
 	
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
+	if( gKeyPressSurfaces[ DEFAULT ] == NULL )
 	{
 		printf( "Failed to load default image!\n" );
 		success = false;
@@ -94,9 +96,9 @@ bool loadMedia()
 	}
 
 	//Load up surface
-	gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] = surfaceLoader.loadSurface( "Assets/keys/up.bmp", gScreenSurface );
+	gKeyPressSurfaces[ UP ] = surfaceLoader.loadSurface( "Assets/keys/up.bmp", gScreenSurface );
 	
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] == NULL )
+	if( gKeyPressSurfaces[ UP ] == NULL )
 	{
 		printf( "Failed to load up image!\n" );
 		success = false;
@@ -107,9 +109,9 @@ bool loadMedia()
 	}
 
 	//Load down surface
-	gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] = surfaceLoader.loadSurface( "Assets/keys/down.bmp", gScreenSurface );
+	gKeyPressSurfaces[ DOWN ] = surfaceLoader.loadSurface( "Assets/keys/down.bmp", gScreenSurface );
 	
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] == NULL )
+	if( gKeyPressSurfaces[ DOWN ] == NULL )
 	{
 		printf( "Failed to load down image!\n" );
 		success = false;
@@ -120,18 +122,18 @@ bool loadMedia()
 	}
 
 	//Load left surface
-	gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] = surfaceLoader.loadSurface( "Assets/keys/left.bmp", gScreenSurface );
+	gKeyPressSurfaces[ LEFT ] = surfaceLoader.loadSurface( "Assets/keys/left.bmp", gScreenSurface );
 	
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] == NULL )
+	if( gKeyPressSurfaces[ LEFT ] == NULL )
 	{
 		printf( "Failed to load left image!\n" );
 		success = false;
 	}
 
 	//Load right surface
-	gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] = surfaceLoader.loadSurface( "Assets/keys/right.bmp", gScreenSurface );
+	gKeyPressSurfaces[ RIGHT ] = surfaceLoader.loadSurface( "Assets/keys/right.bmp", gScreenSurface );
 	
-	if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] == NULL )
+	if( gKeyPressSurfaces[ RIGHT ] == NULL )
 	{
 		printf( "Failed to load right image!\n" );
 		success = false;
@@ -147,7 +149,7 @@ bool loadMedia()
 void close()
 {
 	//Deallocate surfaces
-	for( int i = 0; i < KEY_PRESS_SURFACE_TOTAL; ++i )
+	for( int i = 0; i < TOTAL; ++i )
 	{
 		SDL_FreeSurface( gKeyPressSurfaces[ i ] );
 		gKeyPressSurfaces[ i ] = NULL;
@@ -173,29 +175,37 @@ int main(int argc, char* args[]) {
 		}
 		else {
 			bool quit = false;
-			SDL_Surface* currentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_DEFAULT];
+			SDL_Surface* currentSurface = gKeyPressSurfaces[DEFAULT];
+			SDL_Event eventObject;
 
-			InputHandler inputHandler;
-
-			SDL_Event e;
-			EventManager eventManager;
+			InputHandler& inputHandler = systemManager.inputHandler;
+			EventManager& eventManager = systemManager.eventManager;
 
 			eventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
 				if (event.key.keysym.sym == SDLK_UP)
 				{
-					printf("up key presssed!");
+					printf("up key event!");
 				}
 			});
 
+		
+
+			// Assign actions
+			inputHandler.setAction(SDLK_UP, []() { printf("Down key pressed\n"); });
+			inputHandler.setAction(SDLK_DOWN, []() { printf("Down key pressed\n"); });
+			inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
+			inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
+
+
 			while (!quit) {
 
-				while (SDL_PollEvent(&e) != 0)
+				while (SDL_PollEvent(&eventObject) != 0)
 				{
-					eventManager.processEvent(e);
-					inputHandler.handleEvents(quit, currentSurface, gKeyPressSurfaces, KEY_PRESS_SURFACE_TOTAL, e);
+					eventManager.processEvent(eventObject);
+					inputHandler.handleEvents(eventObject);
 				}
 
-				windowHandler.fitImageToScreen(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT, currentSurface, gScreenSurface);
+				systemManager.windowHandler.fitImageToScreen(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT, currentSurface, gScreenSurface);
 			}
 		}
 	}
@@ -203,7 +213,3 @@ int main(int argc, char* args[]) {
 	close();
 	return 0;
 }
-
-//test
-//test2
-//test3

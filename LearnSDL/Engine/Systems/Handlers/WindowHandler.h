@@ -6,7 +6,7 @@
 class WindowHandler
 {
 public:
-
+	
 	//Constructor
 	WindowHandler();
 

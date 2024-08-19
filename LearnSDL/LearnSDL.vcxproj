@@ -20,7 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
+    <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp" />
     <ClCompile Include="Engine\Systems\Managers\EventManager.cpp" />
+    <ClCompile Include="Engine\Systems\SystemManager.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="Project\GameTest.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\WindowHandler.cpp" />
@@ -29,7 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
+    <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
     <ClInclude Include="Engine\Systems\Managers\EventManager.h" />
+    <ClInclude Include="Engine\Systems\SystemManager.h" />
     <ClInclude Include="Project\GameTest.h" />
     <ClInclude Include="Engine\Systems\Handlers\WindowHandler.h" />
     <ClInclude Include="Engine\Systems\Loaders\MediaLoader.h" />
