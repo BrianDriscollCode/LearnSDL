@@ -1,5 +1,5 @@
-#ifndef EVENTMANAGER_H
-#define EVENTMANAGER_H
+#ifndef CALLBACKEVENTMANAGER_H
+#define CALLBACKEVENTMANAGER_H
 
 #include <functional>
 #include <vector>
@@ -8,11 +8,11 @@
 
 using EventCallback = std::function<void(const SDL_Event&)>;
 
-class EventManager
+class CallbackEventManager
 {
 public:
 
-	EventManager();
+	CallbackEventManager();
 
 	void registerListener(Uint32 eventType, EventCallback callback);
 
@@ -20,8 +20,12 @@ public:
 	
 	void processEvents();
 
+	std::unordered_map<Uint32, std::vector<EventCallback>>& getListenersReference();
+
 private:
 	std::unordered_map<Uint32, std::vector<EventCallback>> listeners;
+
+	bool debugMode;
 };
 
 

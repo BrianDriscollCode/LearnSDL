@@ -10,7 +10,7 @@
 #include "./Loaders/SurfaceLoader.h"
 
 //Managers
-#include "./Managers/EventManager.h"
+#include "./Managers/CallbackEventManager.h"
 
 
 class SystemManager
@@ -30,7 +30,7 @@ public:
 	SurfaceLoader surfaceLoader;
 
 	// Managers
-	EventManager eventManager;
+	CallbackEventManager callbackEventManager;
 
 	
 };

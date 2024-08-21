@@ -36,13 +36,16 @@
     <ClCompile Include="Initializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Systems\Managers\EventManager.cpp">
+    <ClCompile Include="Engine\Systems\Managers\CallbackEventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Systems\SystemManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\Managers\SubEmitEventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,13 +65,16 @@
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Systems\Managers\EventManager.h">
+    <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Systems\SystemManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

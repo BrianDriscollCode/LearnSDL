@@ -13,7 +13,7 @@ InputHandler::~InputHandler() {
 void InputHandler::handleEvents(SDL_Event eventObject) {
 
     if (eventObject.type == SDL_QUIT) {
-        // do nothing
+        exit(0);
     }
     else if (eventObject.type == SDL_KEYDOWN) {
         handleKeyPress(eventObject.key.keysym.sym);

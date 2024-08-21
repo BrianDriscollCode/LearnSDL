@@ -10,7 +10,7 @@
 #include "../Engine/Systems/Loaders/SurfaceLoader.h"
 #include "../Engine/Systems/Handlers/InputHandler.h"
 #include "../Engine/Systems/Handlers/WindowHandler.h"
-#include "../Engine/Systems/Managers/EventManager.h"
+#include "../Engine/Systems/Managers/CallbackEventManager.h"
 
 
 //Screen dimension constants
@@ -179,16 +179,7 @@ int main(int argc, char* args[]) {
 			SDL_Event eventObject;
 
 			InputHandler& inputHandler = systemManager.inputHandler;
-			EventManager& eventManager = systemManager.eventManager;
-
-			eventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
-				if (event.key.keysym.sym == SDLK_UP)
-				{
-					printf("up key event!");
-				}
-			});
-
-		
+			CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
 
 			// Assign actions
 			inputHandler.setAction(SDLK_UP, []() { printf("Down key pressed\n"); });
@@ -196,12 +187,20 @@ int main(int argc, char* args[]) {
 			inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
 			inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
 
+			// Set up events
+			callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
+				if (event.key.keysym.sym == SDLK_UP)
+				{
+					printf("up key event!");
+				}
+			});
+			
 
 			while (!quit) {
 
 				while (SDL_PollEvent(&eventObject) != 0)
 				{
-					eventManager.processEvent(eventObject);
+					callbackEventManager.processEvent(eventObject);
 					inputHandler.handleEvents(eventObject);
 				}
 

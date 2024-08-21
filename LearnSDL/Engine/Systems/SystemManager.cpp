@@ -12,5 +12,5 @@ SystemManager::SystemManager()
 	SurfaceLoader surfaceLoader;
 
 	// Managers
-	EventManager eventManager;
+	CallbackEventManager callbackEventManager;
 }
