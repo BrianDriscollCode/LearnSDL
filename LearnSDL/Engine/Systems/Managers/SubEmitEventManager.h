@@ -8,19 +8,23 @@
 #include <map>
 #include <SDL.h>
 
+using EventType = std::string;
+
 using EventCallback = std::function<void(const SDL_Event&)>;
+
 
 class SubEmitEventManager
 {
 public:
 	SubEmitEventManager();
 
-	std::map<std::string, int> EventTypeMap;
+	void registerListener(const EventType& eventType, EventCallback callback);
 
-	void registerListener(std::map<std::string, int> eventType, EventCallback callback);
+	void emit(const EventType& eventType, const SDL_Event& event);
 
-	void emit();
+private:
 
+	std::unordered_map<EventType, std::vector<EventCallback>> listeners;
 };
 
 

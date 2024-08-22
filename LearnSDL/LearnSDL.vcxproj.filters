@@ -48,6 +48,12 @@
     <ClCompile Include="Engine\Systems\Managers\SubEmitEventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Systems\Managers\EventType.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\TestBed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h">
@@ -75,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\TestBed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

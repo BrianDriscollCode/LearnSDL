@@ -11,6 +11,10 @@
 #include "../Engine/Systems/Handlers/InputHandler.h"
 #include "../Engine/Systems/Handlers/WindowHandler.h"
 #include "../Engine/Systems/Managers/CallbackEventManager.h"
+#include "../Engine/Systems/Managers/SubEmitEventManager.h"
+
+//Testing
+#include "../Engine/Systems/TestBed.h"
 
 
 //Screen dimension constants
@@ -163,6 +167,16 @@ void close()
 	SDL_Quit();
 }
 
+void runDie(const SDL_Event& event)
+{
+	printf("DEATH RAN - runDie :: function\n");
+}
+
+void playerAlive(const SDL_Event& event)
+{
+	printf("ALIVE RAN - playerAlive :: function\n");
+}
+
 int main(int argc, char* args[]) {
 	// Initialize SDL and create window, load media, etc.
 
@@ -180,23 +194,32 @@ int main(int argc, char* args[]) {
 
 			InputHandler& inputHandler = systemManager.inputHandler;
 			CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
+			SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
+			TestBed testBed(systemManager);
+
+			testBed.testEmit();
 
 			// Assign actions
-			inputHandler.setAction(SDLK_UP, []() { printf("Down key pressed\n"); });
-			inputHandler.setAction(SDLK_DOWN, []() { printf("Down key pressed\n"); });
+			inputHandler.setAction(SDLK_UP, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
+			inputHandler.setAction(SDLK_DOWN, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("PlayerSaved", eventObject); });
 			inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
 			inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
 
 			// Set up events
-			callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
+			/*callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
 				if (event.key.keysym.sym == SDLK_UP)
 				{
-					printf("up key event!");
+					printf("up key event!\n");
 				}
-			});
-			
+			});*/
+
+			subEmitEventManager.registerListener("EnemyKilled", runDie);
+			subEmitEventManager.registerListener("PlayerSaved", playerAlive);
+
 
 			while (!quit) {
+
+				
 
 				while (SDL_PollEvent(&eventObject) != 0)
 				{

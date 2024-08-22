@@ -11,6 +11,7 @@
 
 //Managers
 #include "./Managers/CallbackEventManager.h"
+#include "./Managers/SubEmitEventManager.h"
 
 
 class SystemManager
@@ -31,7 +32,7 @@ public:
 
 	// Managers
 	CallbackEventManager callbackEventManager;
-
+	SubEmitEventManager subEmitEventManager;
 	
 };
 

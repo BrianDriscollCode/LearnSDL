@@ -19,6 +19,15 @@ CallbackEventManager::CallbackEventManager()
         listeners[eventType].push_back(callback);
     }
 
+    // Run event if callback is heard
+    void CallbackEventManager::processEvents() {
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            processEvent(event);
+        }
+    }
+
+    // Helper function for processEvents
     void CallbackEventManager::processEvent(const SDL_Event& event) {
 
         auto it = listeners.find(event.type);
@@ -26,13 +35,6 @@ CallbackEventManager::CallbackEventManager()
             for (auto& callback : it->second) {
                 callback(event);
             }
-        }
-    }
-
-    void CallbackEventManager::processEvents() {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            processEvent(event);
         }
     }
 

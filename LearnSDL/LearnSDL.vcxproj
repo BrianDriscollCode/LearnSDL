@@ -22,8 +22,10 @@
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp" />
     <ClCompile Include="Engine\Systems\Managers\CallbackEventManager.cpp" />
+    <ClCompile Include="Engine\Systems\Managers\EventType.h" />
     <ClCompile Include="Engine\Systems\Managers\SubEmitEventManager.cpp" />
     <ClCompile Include="Engine\Systems\SystemManager.cpp" />
+    <ClCompile Include="Engine\Systems\TestBed.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="Project\GameTest.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\WindowHandler.cpp" />
@@ -36,6 +38,7 @@
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />
     <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h" />
     <ClInclude Include="Engine\Systems\SystemManager.h" />
+    <ClInclude Include="Engine\Systems\TestBed.h" />
     <ClInclude Include="Project\GameTest.h" />
     <ClInclude Include="Engine\Systems\Handlers\WindowHandler.h" />
     <ClInclude Include="Engine\Systems\Loaders\MediaLoader.h" />
