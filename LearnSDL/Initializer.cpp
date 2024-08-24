@@ -4,7 +4,12 @@
 #include <string>
 #include <iostream>
 
-//Systems Manager
+// Rendering
+#include <GL/glew.h>
+#include <SDL_opengl.h>
+
+
+// Systems Manager
 #include "../Engine/Systems/SystemManager.h"
 
 #include "../Engine/Systems/Loaders/SurfaceLoader.h"
@@ -13,15 +18,15 @@
 #include "../Engine/Systems/Managers/CallbackEventManager.h"
 #include "../Engine/Systems/Managers/SubEmitEventManager.h"
 
-//Testing
+// Testing
 #include "../Engine/Systems/TestBed.h"
 
 
-//Screen dimension constants
+// Screen dimension constants
 const int SCREEN_WIDTH = 1300;
 const int SCREEN_HEIGHT = 900;
 
-//Key press surfaces constants
+// Key press surfaces constants
 enum KeyPressSurfaces
 {
 	DEFAULT,

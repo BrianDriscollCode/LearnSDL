@@ -3,13 +3,15 @@
 
 #include <SDL.h>
 #include "SystemManager.h"
+#include <functional>
 
 class TestBed
 {
 public:
 	TestBed(SystemManager& systemManager);
-	void printLife(const SDL_Event& event);
+	void printLife();
 	void testEmit();
+
 	
 
 private:
