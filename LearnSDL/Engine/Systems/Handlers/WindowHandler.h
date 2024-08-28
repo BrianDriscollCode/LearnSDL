@@ -14,6 +14,8 @@ public:
 
 	void fitImageToScreen(SDL_Window* gWindow, int SCREEN_WIDTH, int SCREEN_HEIGHT, SDL_Surface* currentSurface, SDL_Surface* gScreenSurface);
 
+	SDL_Surface* getScreenSurface(SDL_Window* gWindow);
+
 };
 
 #endif 

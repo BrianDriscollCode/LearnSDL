@@ -42,6 +42,12 @@ public:
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+        // Use Vsync
+        if (SDL_GL_SetSwapInterval(1) < 0)
+        {
+            printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+        }
     }
 
     void StartRenderer()
@@ -73,11 +79,11 @@ public:
 
     void terminateRenderer()
     {
-        debugOutput.outputGreenText("**SUCCESS**::TERMINATERENDERER::CLOSING::[Engine/Renderer/InitializeRenderer.h]");
         // Deallocate OpenGL resources
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
         glDeleteProgram(shaderProgram);
+        debugOutput.outputGreenText("**SUCCESS**::TERMINATERENDERER::CLOSING::[Engine/Renderer/InitializeRenderer.h]");
     }
 };
 

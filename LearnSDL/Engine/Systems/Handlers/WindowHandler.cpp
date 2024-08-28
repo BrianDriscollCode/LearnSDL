@@ -17,7 +17,7 @@ WindowHandler::WindowHandler()
 		}
 		else
 		{
-			gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+			gWindow = SDL_CreateWindow("OpenGL Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 			if ( gWindow == NULL )
 			{
 				printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -39,5 +39,10 @@ WindowHandler::WindowHandler()
 		stretchRect.h = SCREEN_HEIGHT;
 		SDL_BlitScaled(currentSurface, NULL, gScreenSurface, &stretchRect);
 		SDL_UpdateWindowSurface(gWindow);
+	}
+
+	SDL_Surface* WindowHandler::getScreenSurface(SDL_Window* gWindow)
+	{
+		return SDL_GetWindowSurface(gWindow);
 	}
 

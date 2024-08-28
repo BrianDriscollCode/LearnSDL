@@ -29,11 +29,12 @@
     <ClCompile Include="Engine\Systems\SystemManager.cpp" />
     <ClCompile Include="Engine\Systems\TestBed.cpp" />
     <ClCompile Include="Initializer.cpp" />
-    <ClCompile Include="Project\GameTest.cpp" />
+    <ClCompile Include="Project\Game\GameTest.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\WindowHandler.cpp" />
     <ClCompile Include="Engine\Systems\Loaders\MediaLoader.cpp" />
     <ClCompile Include="Engine\Systems\Loaders\SurfaceLoader.cpp" />
     <ClCompile Include="LeftOver.cpp" />
+    <ClCompile Include="Project\ProjectInitializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
@@ -44,10 +45,11 @@
     <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h" />
     <ClInclude Include="Engine\Systems\SystemManager.h" />
     <ClInclude Include="Engine\Systems\TestBed.h" />
-    <ClInclude Include="Project\GameTest.h" />
+    <ClInclude Include="Project\Game\GameTest.h" />
     <ClInclude Include="Engine\Systems\Handlers\WindowHandler.h" />
     <ClInclude Include="Engine\Systems\Loaders\MediaLoader.h" />
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h" />
+    <ClInclude Include="Project\ProjectInitializer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Renderer\Resources\BasicSquare.frag" />

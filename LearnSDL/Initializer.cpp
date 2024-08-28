@@ -24,6 +24,8 @@
 // Testing
 #include "../Engine/Systems/TestBed.h"
 
+// Game
+#include "./Project/ProjectInitializer.h"
 
 // Screen dimension constants
 const int SCREEN_WIDTH = 1300;
@@ -49,40 +51,46 @@ void close();
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 
-//The images that correspond to a keypress
-SDL_Surface* gKeyPressSurfaces[ TOTAL ];
-
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
-//Current displayed image
-SDL_Surface* gStretchedSurface = NULL;
-
-
-// Load Systems
+// Load Systems made with SDL
 //
 SystemManager systemManager;
 
+// OpenGL Rendering
 GLuint shaderProgram;
 GLuint VAO, VBO;
 InitializeRenderer renderer(VAO, VBO, shaderProgram);
-// Function to initialize shaders and buffers
 
+bool initGLEW()
+{
+	// Initialize GLEW (this should be done after creating the OpenGL context)
+	glewExperimental = GL_TRUE;
+	GLenum glewError = glewInit();
+	if (glewError != GLEW_OK)
+	{
+		printf("Error initializing GLEW! %s\n", glewGetErrorString(glewError));
+		return false;
+	}
+
+	return true;
+}
 
 bool init()
 {
 	//Initialization flag
 	bool success = true;
-	std::cout << " Flag 1 " << std::endl;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
 
 	// Handles window creation logic
-	//gWindow = systemManager.windowHandler.createWindow(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
-	gWindow = SDL_CreateWindow("OpenGL Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	std::cout << " flag2" << std::endl;
+	// 
+	// Uses SDL_WINDOW_OPENGL
+	gWindow = systemManager.windowHandler.createWindow(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
+
 	if (gWindow == NULL)
 	{
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
@@ -93,6 +101,7 @@ bool init()
 		// Create the OpenGL context
 		SDL_GLContext glContext = SDL_GL_CreateContext(gWindow);
 
+		// Check for context and initialize GLEW and Renderer if it exists
 		if (glContext == NULL)
 		{
 			printf("OpenGL context could not be created! SDL Error: %s\n", SDL_GetError());
@@ -100,35 +109,18 @@ bool init()
 		}
 		else
 		{
-			// Initialize GLEW (this should be done after creating the OpenGL context)
-			glewExperimental = GL_TRUE;
-			GLenum glewError = glewInit();
-			if (glewError != GLEW_OK)
-			{
-				printf("Error initializing GLEW! %s\n", glewGetErrorString(glewError));
-				success = false;
-			}
-			else
+			
+			bool glewInitialized = initGLEW();
+
+			if (glewInitialized)
 			{
 				renderer.StartRenderer();
 			}
-
-			// Use Vsync
-			if (SDL_GL_SetSwapInterval(1) < 0)
-			{
-				printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
-			}
-
-			// Get window surface
-			gScreenSurface = SDL_GetWindowSurface(gWindow);
-			std::cout << " Flag3 " << std::endl;
-	
 		}
 	}
 
 	return success;
 }
-
 
 
 void close()
@@ -154,11 +146,12 @@ void playerAlive(const SDL_Event& event)
 }
 
 int main(int argc, char* args[]) {
+	
 	// Initialize SDL and create window, load media, etc.
 
-	std::cout << " flag 6 " << std::endl;
+	bool intializationSuccess = init();
 
-	if (!init()) {
+	if (!intializationSuccess) {
 		printf("Failed to initialize!\n");
 	}
 	else {
@@ -170,25 +163,28 @@ int main(int argc, char* args[]) {
 		SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
 		TestBed testBed(systemManager);
 
-		testBed.testEmit();
-		std::cout << " Flag 4 " << std::endl;
-		// Assign actions
-		inputHandler.setAction(SDLK_UP, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
-		inputHandler.setAction(SDLK_DOWN, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("PlayerSaved", eventObject); });
-		inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
-		inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
-		inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
+		//testBed.testEmit();
 
-		// Set up events
-		/*callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
-			if (event.key.keysym.sym == SDLK_UP)
-			{
-				printf("up key event!\n");
-			}
-		});*/
+		//// Assign actions
+		//inputHandler.setAction(SDLK_UP, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
+		//inputHandler.setAction(SDLK_DOWN, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("PlayerSaved", eventObject); });
+		//inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
+		//inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
+		//inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
 
+		//// Set up events
+		///*callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
+		//	if (event.key.keysym.sym == SDLK_UP)
+		//	{
+		//		printf("up key event!\n");
+		//	}
+		//});*/
+
+		
+		//subEmitEventManager.registerListener("PlayerSaved", playerAlive);
 		subEmitEventManager.registerListener("EnemyKilled", runDie);
-		subEmitEventManager.registerListener("PlayerSaved", playerAlive);
+		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject);
+		projectInitializer.gameCode();
 
 
 		Shader shader("./Engine/Renderer/Resources/BasicSquare.vert", "./Engine/Renderer/Resources/BasicSquare.frag");
@@ -210,7 +206,6 @@ int main(int argc, char* args[]) {
 
 			// Swap the OpenGL buffers
 			SDL_GL_SwapWindow(gWindow);
-			
 		}
 	}
 
