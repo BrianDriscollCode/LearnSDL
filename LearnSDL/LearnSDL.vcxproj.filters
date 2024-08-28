@@ -54,6 +54,15 @@
     <ClCompile Include="Engine\Systems\TestBed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LeftOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Renderer\Shaders\Shader.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Renderer\InitializeRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h">
@@ -86,5 +95,15 @@
     <ClInclude Include="Engine\Systems\TestBed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Debug\DebugOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Renderer\InitializeRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Engine\Renderer\Resources\BasicSquare.frag" />
+    <Text Include="Engine\Renderer\Resources\BasicSquare.vert" />
   </ItemGroup>
 </Project>

@@ -17,7 +17,6 @@ void TestBed::testEmit()
 {
 	SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
 
-
 	// Registering member function using a lambda function
 	
 	// (param1: eventType, param2: event)
