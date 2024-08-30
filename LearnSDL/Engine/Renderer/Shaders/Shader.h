@@ -64,6 +64,7 @@ public:
             debugOutput.outputRedText(e.what());
             std::cout << "VERTEX SHADER PATH: " << vertexPath << std::endl;
             std::cout << "FRAGMENT SHADER PATH: " << fragmentPath << std::endl;
+            std::cout << "FRAGMENT SHADER PATH: " << fragmentPath << std::endl;
         }
         std::cout << " test0 " << std::endl;
         const char* vShaderCode = vertexCode.c_str();
@@ -134,6 +135,11 @@ public:
     void use()
     {
         glUseProgram(ID);
+    }
+
+    unsigned int getProgram() const
+    {
+        return ID;
     }
 
     // utility functions

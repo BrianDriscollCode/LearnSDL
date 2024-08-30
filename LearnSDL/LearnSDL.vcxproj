@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\Renderer\InitializeRenderer.cpp" />
+    <ClCompile Include="Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h" />
+    <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp" />
     <ClCompile Include="Engine\Systems\Managers\CallbackEventManager.cpp" />
@@ -38,7 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
-    <ClInclude Include="Engine\Renderer\InitializeRenderer.h" />
+    <ClInclude Include="Engine\Renderer\Renderer.h" />
+    <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />

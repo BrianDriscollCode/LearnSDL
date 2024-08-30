@@ -60,10 +60,13 @@
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Renderer\InitializeRenderer.cpp">
+    <ClCompile Include="Project\ProjectInitializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Project\ProjectInitializer.cpp">
+    <ClCompile Include="Engine\Renderer\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,10 +104,13 @@
     <ClInclude Include="Engine\Debug\DebugOutput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Renderer\InitializeRenderer.h">
+    <ClInclude Include="Engine\Renderer\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Project\ProjectInitializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Renderer\Tools\Drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

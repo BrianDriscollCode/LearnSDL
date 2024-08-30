@@ -10,8 +10,7 @@
 #include <SDL_opengl.h>
 
 // Rendering Internal
-#include "../Engine/Renderer/InitializeRenderer.h";
-#include "../Engine/Renderer/Shaders/Shader.h"
+#include "../Engine/Renderer/Renderer.h";
 
 // Systems Manager
 #include "../Engine/Systems/SystemManager.h"
@@ -55,13 +54,10 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 
 // Load Systems made with SDL
-//
 SystemManager systemManager;
 
 // OpenGL Rendering
-GLuint shaderProgram;
-GLuint VAO, VBO;
-InitializeRenderer renderer(VAO, VBO, shaderProgram);
+Renderer renderer;
 
 bool initGLEW()
 {
@@ -126,7 +122,7 @@ bool init()
 void close()
 {
 	
-	renderer.terminateRenderer();
+	renderer.TerminateRenderer();
 	// Destroy window
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
@@ -170,7 +166,7 @@ int main(int argc, char* args[]) {
 		//inputHandler.setAction(SDLK_DOWN, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("PlayerSaved", eventObject); });
 		//inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
 		//inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
-		//inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
+		inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
 
 		//// Set up events
 		///*callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
@@ -182,13 +178,19 @@ int main(int argc, char* args[]) {
 
 		
 		//subEmitEventManager.registerListener("PlayerSaved", playerAlive);
+
+
 		subEmitEventManager.registerListener("EnemyKilled", runDie);
+
+		inputHandler.setAction(SDLK_LEFT, []() { renderer.drawer.MoveSquare(); });
+
+
+		// Initialize Game Project
 		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject);
 		projectInitializer.gameCode();
 
 
-		Shader shader("./Engine/Renderer/Resources/BasicSquare.vert", "./Engine/Renderer/Resources/BasicSquare.frag");
-
+		// Game Loop
 		while (!quit) {
 			while (SDL_PollEvent(&eventObject) != 0)
 			{
@@ -198,14 +200,11 @@ int main(int argc, char* args[]) {
 			// Clear the color buffer
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			// Draw the blue box
-			//glUseProgram(shaderProgram);
-			shader.use();
-			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			// Draw shapes from renderer
+			renderer.RenderScene(gWindow);
 
 			// Swap the OpenGL buffers
-			SDL_GL_SwapWindow(gWindow);
+			//SDL_GL_SwapWindow(gWindow);
 		}
 	}
 
