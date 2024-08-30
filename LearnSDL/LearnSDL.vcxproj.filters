@@ -69,6 +69,12 @@
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Renderer\Tools\TransformHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\Enum\KeyPress.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h">
@@ -111,6 +117,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Renderer\Tools\TransformHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,6 +22,7 @@
     <ClCompile Include="Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h" />
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp" />
+    <ClCompile Include="Engine\Renderer\Tools\TransformHandler.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp" />
     <ClCompile Include="Engine\Systems\Managers\CallbackEventManager.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="Engine\Systems\Managers\SubEmitEventManager.cpp" />
     <ClCompile Include="Engine\Systems\SystemManager.cpp" />
     <ClCompile Include="Engine\Systems\TestBed.cpp" />
+    <ClCompile Include="Engine\Utilities\Enum\KeyPress.h" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="Project\Game\GameTest.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\WindowHandler.cpp" />
@@ -41,6 +43,7 @@
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
     <ClInclude Include="Engine\Renderer\Renderer.h" />
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
+    <ClInclude Include="Engine\Renderer\Tools\TransformHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />

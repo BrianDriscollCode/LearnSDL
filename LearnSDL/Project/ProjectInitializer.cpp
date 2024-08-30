@@ -16,7 +16,7 @@ void ProjectInitializer::randomCode(const SDL_Event& event)
 void ProjectInitializer::gameCode()
 {
 	subEmitEventManager.registerListener("EnemyKilled", randomCode );
-	inputHandler.setAction(SDLK_UP, [this]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
+	//inputHandler.setAction(SDLK_UP, [this]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
 }
 
 

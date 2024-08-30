@@ -20,6 +20,9 @@
 #include "../Engine/Systems/Managers/CallbackEventManager.h"
 #include "../Engine/Systems/Managers/SubEmitEventManager.h"
 
+// Utilities
+#include "../Engine/Utilities/Enum/KeyPress.h";
+
 // Testing
 #include "../Engine/Systems/TestBed.h"
 
@@ -30,16 +33,6 @@
 const int SCREEN_WIDTH = 1300;
 const int SCREEN_HEIGHT = 900;
 
-// Key press surfaces constants
-enum KeyPressSurfaces
-{
-	DEFAULT,
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	TOTAL
-};
 
 //Starts up SDL and creates window
 bool init();
@@ -182,7 +175,10 @@ int main(int argc, char* args[]) {
 
 		subEmitEventManager.registerListener("EnemyKilled", runDie);
 
-		inputHandler.setAction(SDLK_LEFT, []() { renderer.drawer.MoveSquare(); });
+		inputHandler.setAction(SDLK_LEFT, []() { renderer.drawer.MoveSquare(LEFT); });
+		inputHandler.setAction(SDLK_RIGHT, []() { renderer.drawer.MoveSquare(RIGHT); });
+		inputHandler.setAction(SDLK_UP, []() { renderer.drawer.MoveSquare(UP); });
+		inputHandler.setAction(SDLK_DOWN, []() { renderer.drawer.MoveSquare(DOWN); });
 
 
 		// Initialize Game Project

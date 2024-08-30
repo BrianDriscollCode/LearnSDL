@@ -6,6 +6,11 @@
 #include <SDL.h>
 
 #include "../Engine/Debug/DebugOutput.h"
+#include "../Tools/TransformHandler.h"
+
+// Utilities
+
+#include "../Engine/Utilities/Enum/KeyPress.h"
 
 class Drawer
 {
@@ -16,6 +21,7 @@ public:
     float offsetX;
     float offsetY;
     DebugOutput debugOutput;
+    TransformHandler transformHandler;
 
     Drawer(bool activate);
 
@@ -25,7 +31,7 @@ public:
 
     void Draw(SDL_Window* gWindow);
 
-    void MoveSquare();
+    void MoveSquare(KeyPress direction);
 
     void DeleteDrawer();
 };
