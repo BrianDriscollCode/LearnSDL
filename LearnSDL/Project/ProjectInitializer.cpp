@@ -1,22 +1,34 @@
 
 #include "ProjectInitializer.h"
-#include "./Game/GameTest.h"
 
-ProjectInitializer::ProjectInitializer(InputHandler& inputHandlerRef, SubEmitEventManager& subEmitEventManagerRef, SDL_Event& eventObjectRef)
-	: inputHandler(inputHandlerRef), subEmitEventManager(subEmitEventManagerRef), eventObject(eventObjectRef)
+
+ProjectInitializer::ProjectInitializer(
+	InputHandler& inputHandlerRef,
+	SubEmitEventManager& subEmitEventManagerRef,
+	SDL_Event& eventObjectRef,
+	Renderer& rendererRef
+)
+	: inputHandler(inputHandlerRef),
+	subEmitEventManager(subEmitEventManagerRef),
+	eventObject(eventObjectRef),
+	renderer(rendererRef),
+	debugOutput(true),
+	playerMovement(inputHandlerRef)
 {
 
 }
 
-void ProjectInitializer::randomCode(const SDL_Event& event)
+void ProjectInitializer::InitializeGameCode()
 {
-	printf("ProjectInitializer::RunEvent::EnemyKilled");
-}
-
-void ProjectInitializer::gameCode()
-{
-	subEmitEventManager.registerListener("EnemyKilled", randomCode );
+	//subEmitEventManager.registerListener("EnemyKilled", randomCode );
 	//inputHandler.setAction(SDLK_UP, [this]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
+	//inputHandler.setAction(SDLK_RIGHT, [this]() { debugOutput.outputYellowText("NONE SET"); });
+	//playerMovement.OnInit();
+}
+
+void ProjectInitializer::InLoopCode(SDL_Event& eventObject)
+{
+	playerMovement.MoveInput(eventObject);
 }
 
 

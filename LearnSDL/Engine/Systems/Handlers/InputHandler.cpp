@@ -1,7 +1,9 @@
 #include "InputHandler.h"
 #include <cstdio>
 
-InputHandler::InputHandler() {
+InputHandler::InputHandler()
+    : debugOutput(true) // Assuming you have a DebugOutput instance or similar
+{
     // Constructor logic if needed
 }
 
@@ -9,50 +11,46 @@ InputHandler::~InputHandler() {
     // Destructor logic if needed
 }
 
-
 void InputHandler::handleEvents(SDL_Event eventObject) {
-
     if (eventObject.type == SDL_QUIT) {
         exit(0);
     }
-    else if (eventObject.type == SDL_KEYDOWN) {
-        handleKeyPress(eventObject.key.keysym.sym);
+    if (eventObject.type == SDL_KEYDOWN) {
+        handleKeyDown(eventObject.key.keysym.sym);
+        //debugOutput.outputYellowText("KEYDOWN");
+        
     }
-
+    else if (eventObject.type == SDL_KEYUP) {
+        handleKeyUp(eventObject.key.keysym.sym);
+        //debugOutput.outputYellowText("KEYUP");
+    }
 }
 
-void InputHandler::handleKeyPress(SDL_Keycode key) {
-    // Find the action associated with the key and execute it
-    auto it = keyActions.find(key);
-    if (it != keyActions.end()) {
-        it->second(); // Call the action
+void InputHandler::handleKeyDown(SDL_Keycode key) {
+    auto it = keyDownActions.find(key);
+    if (it != keyDownActions.end()) {
+        it->second(); // Call the action for key down
     }
     else {
-        printf("default"); // Default action if key not found
+        //printf("Key down default action\n"); // Default action if key not found
     }
 }
 
-// Relook at this to understand
-void InputHandler::setAction(SDL_Keycode key, std::function<void()> action) {
-    keyActions[key] = action;
+void InputHandler::handleKeyUp(SDL_Keycode key) {
+    auto it = keyUpActions.find(key);
+    if (it != keyUpActions.end()) {
+        it->second(); // Call the action for key up
+    }
+    else {
+        //printf("Key up default action\n"); // Default action if key not found
+    }
 }
 
-//void InputHandler::handleKeyPress(SDL_Keycode key, SDL_Surface*& currentSurface, SDL_Surface* surfaces[], int totalSurfaces) {
-//    switch (key) {
-//    case SDLK_UP:
-//        currentSurface = surfaces[1]; // Assuming surfaces[1] is the UP surface
-//        break;
-//    case SDLK_DOWN:
-//        currentSurface = surfaces[2]; // Assuming surfaces[2] is the DOWN surface
-//        break;
-//    case SDLK_LEFT:
-//        currentSurface = surfaces[3]; // Assuming surfaces[3] is the LEFT surface
-//        break;
-//    case SDLK_RIGHT:
-//        currentSurface = surfaces[4]; // Assuming surfaces[4] is the RIGHT surface
-//        break;
-//    default:
-//        currentSurface = surfaces[0]; // Default surface
-//        break;
-//    }
-//}
+void InputHandler::setAction(SDL_Keycode key, std::function<void()> action) {
+    keyDownActions[key] = action;
+    //debugOutput.outputYellowText("INPUTHANDLER::SetActionReceived");
+}
+
+void InputHandler::setKeyUpAction(SDL_Keycode key, std::function<void()> action) {
+    keyUpActions[key] = action;
+}

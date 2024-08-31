@@ -47,7 +47,7 @@ void Drawer::Draw(SDL_Window* gWindow)
     SDL_GL_SwapWindow(gWindow);
 }
 
-void Drawer::MoveSquare(KeyPress direction)
+void Drawer::MoveSquare(KeyPress directionX, KeyPress directionY)
 {
 
     //GLfloat updatedVertices[] =
@@ -61,10 +61,7 @@ void Drawer::MoveSquare(KeyPress direction)
     //offsetX += offsetX;
    // offsetY += offsetY;
 
-    transformHandler.MoveObject(direction);
-
-
-
+    transformHandler.MoveObject(directionX, directionY);
 
     GLfloat updatedVertices[12];
 
@@ -80,7 +77,7 @@ void Drawer::MoveSquare(KeyPress direction)
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(updatedVertices), updatedVertices); // Use glBufferSubData for partial updates
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    debugOutput.outputGreenText("**SUCCESS**::DRAWER::AttributePointersSet::[Engine/Renderer/Drawer.h]");
+    //debugOutput.outputGreenText("**SUCCESS**::DRAWER::AttributePointersSet::[Engine/Renderer/Drawer.h]");
 }
 
 void Drawer::DeleteDrawer()

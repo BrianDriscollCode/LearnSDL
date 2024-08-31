@@ -68,3 +68,22 @@
 //
 //	return success;
 //}
+
+//// Set up events
+		///*callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
+		//	if (event.key.keysym.sym == SDLK_UP)
+		//	{
+		//		printf("up key event!\n");
+		//	}
+		//});*/
+
+
+		//subEmitEventManager.registerListener("PlayerSaved", playerAlive);
+
+		//testBed.testEmit();
+
+		//// Assign actions
+		//inputHandler.setAction(SDLK_UP, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
+		//inputHandler.setAction(SDLK_DOWN, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("PlayerSaved", eventObject); });
+		//inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
+		//inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });

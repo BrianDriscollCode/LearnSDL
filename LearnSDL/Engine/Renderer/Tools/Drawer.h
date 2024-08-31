@@ -6,7 +6,7 @@
 #include <SDL.h>
 
 #include "../Engine/Debug/DebugOutput.h"
-#include "../Tools/TransformHandler.h"
+#include "../Tools/Handlers/TransformHandler.h"
 
 // Utilities
 
@@ -31,7 +31,7 @@ public:
 
     void Draw(SDL_Window* gWindow);
 
-    void MoveSquare(KeyPress direction);
+    void MoveSquare(KeyPress directionX, KeyPress directionY);
 
     void DeleteDrawer();
 };

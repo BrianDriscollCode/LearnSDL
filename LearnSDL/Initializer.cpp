@@ -1,4 +1,3 @@
-
 #include <SDL.h>
 #include <stdio.h>
 #include <string>
@@ -33,7 +32,6 @@
 const int SCREEN_WIDTH = 1300;
 const int SCREEN_HEIGHT = 900;
 
-
 //Starts up SDL and creates window
 bool init();
 
@@ -42,9 +40,6 @@ void close();
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
-
-//The surface contained by the window
-SDL_Surface* gScreenSurface = NULL;
 
 // Load Systems made with SDL
 SystemManager systemManager;
@@ -111,33 +106,18 @@ bool init()
 	return success;
 }
 
-
 void close()
 {
-	
+	// Terminate renderer, window, and SDL
 	renderer.TerminateRenderer();
-	// Destroy window
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
-
-	// Quit SDL subsystems
 	SDL_Quit();
-}
-
-void runDie(const SDL_Event& event)
-{
-	printf("DEATH RAN - runDie :: function\n");
-}
-
-void playerAlive(const SDL_Event& event)
-{
-	printf("ALIVE RAN - playerAlive :: function\n");
 }
 
 int main(int argc, char* args[]) {
 	
 	// Initialize SDL and create window, load media, etc.
-
 	bool intializationSuccess = init();
 
 	if (!intializationSuccess) {
@@ -147,60 +127,53 @@ int main(int argc, char* args[]) {
 		bool quit = false;
 		SDL_Event eventObject;
 
+		// Initiate Systems
 		InputHandler& inputHandler = systemManager.inputHandler;
 		CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
 		SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
-		TestBed testBed(systemManager);
-
-		//testBed.testEmit();
-
-		//// Assign actions
-		//inputHandler.setAction(SDLK_UP, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
-		//inputHandler.setAction(SDLK_DOWN, [eventObject, &subEmitEventManager]() { subEmitEventManager.emit("PlayerSaved", eventObject); });
-		//inputHandler.setAction(SDLK_LEFT, []() { printf("Left key pressed\n"); });
-		//inputHandler.setAction(SDLK_RIGHT, []() { printf("Right key pressed\n"); });
-		inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
-
-		//// Set up events
-		///*callbackEventManager.registerListener(SDL_KEYDOWN, [](const SDL_Event& event) {
-		//	if (event.key.keysym.sym == SDLK_UP)
-		//	{
-		//		printf("up key event!\n");
-		//	}
-		//});*/
-
-		
-		//subEmitEventManager.registerListener("PlayerSaved", playerAlive);
-
-
-		subEmitEventManager.registerListener("EnemyKilled", runDie);
-
-		inputHandler.setAction(SDLK_LEFT, []() { renderer.drawer.MoveSquare(LEFT); });
-		inputHandler.setAction(SDLK_RIGHT, []() { renderer.drawer.MoveSquare(RIGHT); });
-		inputHandler.setAction(SDLK_UP, []() { renderer.drawer.MoveSquare(UP); });
-		inputHandler.setAction(SDLK_DOWN, []() { renderer.drawer.MoveSquare(DOWN); });
-
 
 		// Initialize Game Project
-		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject);
-		projectInitializer.gameCode();
+		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer);
+		projectInitializer.InitializeGameCode();
 
+		// Close Engine Logic
+		inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
+
+		const int FPS = 60;
+		const int frameDelay = 1000 / FPS;
+
+		Uint32 frameStart;
+		int frameTime;
+
+		//SDL_EventState(SDL_KEYDOWN, SDL_IGNORE);
 
 		// Game Loop
 		while (!quit) {
+			frameStart = SDL_GetTicks();
+
 			while (SDL_PollEvent(&eventObject) != 0)
 			{
 				callbackEventManager.processEvent(eventObject);
 				inputHandler.handleEvents(eventObject);
+				projectInitializer.InLoopCode(eventObject);
 			}
+
 			// Clear the color buffer
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			KeyPress movementX = projectInitializer.playerMovement.GetXMovementState();
+			KeyPress movementY = projectInitializer.playerMovement.GetYMovementState();
+
+			renderer.drawer.MoveSquare(movementX, movementY);
 
 			// Draw shapes from renderer
 			renderer.RenderScene(gWindow);
 
-			// Swap the OpenGL buffers
-			//SDL_GL_SwapWindow(gWindow);
+			frameTime = SDL_GetTicks() - frameStart;
+
+			if (frameDelay > frameTime) {
+				SDL_Delay(frameDelay - frameTime);
+			}
 		}
 	}
 

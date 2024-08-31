@@ -17,7 +17,7 @@ public:
     void SetInitialVertices(const GLfloat initialVertices[12]);
 
     // Method to move the object and update vertices
-    void MoveObject(KeyPress direction);
+    void MoveObject(KeyPress xDirection, KeyPress yDirection);
 
     // Method to get the vertices array
     const GLfloat* GetVertices() const;
