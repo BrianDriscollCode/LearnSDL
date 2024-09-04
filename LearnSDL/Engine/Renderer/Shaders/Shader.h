@@ -36,27 +36,19 @@ public:
             vShaderFile.open(vertexPath);
             fShaderFile.open(fragmentPath);
 
-            std::cout << " Files Opened " << std::endl;
-
             std::stringstream vShaderStream, fShaderStream;
             vShaderStream << vShaderFile.rdbuf();
             fShaderStream << fShaderFile.rdbuf();
 
-            std::cout << " Files Read " << std::endl;
-
             vShaderFile.close();
             fShaderFile.close();
-
-            std::cout << " Files closed " << std::endl;
 
             vertexCode = vShaderStream.str();
             fragmentCode = fShaderStream.str();
 
-            std::cout << " File code streamed " << std::endl;
-
             debugOutput.outputGreenText("**SUCCESS**::SHADER::FILE_READ_SUCCESSFULLY::[Redenderer/Shaders/Shader.h]");
-            std::cout << "VERTEX SHADER PATH: " << vertexPath << std::endl;
-            std::cout << "FRAGMENT SHADER PATH: " << fragmentPath << std::endl;
+            debugOutput.outputGreenText("VERTEX SHADER PATH: ", vertexPath);
+            debugOutput.outputGreenText("FRAGMENT SHADER PATH: ", fragmentPath);
         }
         catch (std::ifstream::failure& e)
         {
@@ -66,21 +58,20 @@ public:
             std::cout << "FRAGMENT SHADER PATH: " << fragmentPath << std::endl;
             std::cout << "FRAGMENT SHADER PATH: " << fragmentPath << std::endl;
         }
-        std::cout << " test0 " << std::endl;
+
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
-        std::cout << " test " << std::endl;
         unsigned int vertex, fragment;
-        std::cout << " test2 " << std::endl;
+
         // compile vertex shader
         vertex = glCreateShader(GL_VERTEX_SHADER); // excpetion null here
         glShaderSource(vertex, 1, &vShaderCode, NULL);
         glCompileShader(vertex);
-        std::cout << " test3 " << std::endl;
+
         int success;
         char infoLog[512];
         glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
-        std::cout << " test4 " << std::endl;
+
         if (!success)
         {
             glGetShaderInfoLog(vertex, 512, NULL, infoLog);

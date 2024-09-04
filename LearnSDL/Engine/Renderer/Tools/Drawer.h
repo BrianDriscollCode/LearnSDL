@@ -8,28 +8,40 @@
 #include "../Engine/Debug/DebugOutput.h"
 #include "../Tools/Handlers/TransformHandler.h"
 
+// Systems
+
+#include "../Engine/Entity/Entity.h"
+
 // Utilities
 
 #include "../Engine/Utilities/Enum/KeyPress.h"
 
+// GLM
+
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
+
+// Shader Tools
+#include "../Shaders/Shader.h"
+
 class Drawer
 {
 public:
-    GLuint VAO;
+    GLuint squareVAO;
     GLuint VBO;
     GLuint EBO;
     float offsetX;
     float offsetY;
     DebugOutput debugOutput;
     TransformHandler transformHandler;
+    std::unique_ptr<Shader> squareShader;
 
     Drawer(bool activate);
 
-    void initializeDrawer(GLfloat vertices[], GLuint indices[], int verticesSize, int indicesSize);
+    void initializeSquareVAO();
 
-    void SetAttributePointers();
-
-    void Draw(SDL_Window* gWindow);
+    void DrawSquare(SDL_Window* gWindow, Entity player);
 
     void MoveSquare(KeyPress directionX, KeyPress directionY);
 

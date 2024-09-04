@@ -75,6 +75,24 @@
     <ClCompile Include="Project\Game\Player\PlayerMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Renderer\Tools\Resources\ShapeLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Renderer\Tools\DrawerV2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Entity\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Entity\EntityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\Helper\ReferenceHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\Player\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h">
@@ -122,9 +140,24 @@
     <ClInclude Include="Project\Game\Player\PlayerMovement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Renderer\Tools\DrawerV2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Entity\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Entity\EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\Helper\ReferenceHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\Player\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Engine\Renderer\Resources\BasicSquare.frag" />
-    <Text Include="Engine\Renderer\Resources\BasicSquare.vert" />
+    <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.frag" />
+    <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.vert" />
   </ItemGroup>
 </Project>

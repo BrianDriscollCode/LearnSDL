@@ -19,12 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Entity\Entity.cpp" />
+    <ClCompile Include="Engine\Entity\EntityManager.cpp" />
     <ClCompile Include="Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h" />
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp" />
+    <ClCompile Include="Engine\Renderer\Tools\DrawerV2.cpp" />
     <ClCompile Include="Engine\Renderer\Tools\Handlers\TransformHandler.cpp" />
+    <ClCompile Include="Engine\Renderer\Tools\Resources\ShapeLibrary.h" />
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp" />
+    <ClCompile Include="Engine\Systems\Helper\ReferenceHelper.cpp" />
     <ClCompile Include="Engine\Systems\Managers\CallbackEventManager.cpp" />
     <ClCompile Include="Engine\Systems\Managers\EventType.h" />
     <ClCompile Include="Engine\Systems\Managers\SubEmitEventManager.cpp" />
@@ -36,16 +41,21 @@
     <ClCompile Include="Engine\Systems\Loaders\MediaLoader.cpp" />
     <ClCompile Include="Engine\Systems\Loaders\SurfaceLoader.cpp" />
     <ClCompile Include="LeftOver.cpp" />
+    <ClCompile Include="Project\Game\Player\Player.cpp" />
     <ClCompile Include="Project\Game\Player\PlayerMovement.cpp" />
     <ClCompile Include="Project\ProjectInitializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
+    <ClInclude Include="Engine\Entity\Entity.h" />
+    <ClInclude Include="Engine\Entity\EntityManager.h" />
+    <ClInclude Include="Engine\Renderer\Tools\DrawerV2.h" />
     <ClInclude Include="Engine\Renderer\Renderer.h" />
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Renderer\Tools\Handlers\TransformHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
+    <ClInclude Include="Engine\Systems\Helper\ReferenceHelper.h" />
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />
     <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h" />
     <ClInclude Include="Engine\Systems\SystemManager.h" />
@@ -53,12 +63,13 @@
     <ClInclude Include="Engine\Systems\Handlers\WindowHandler.h" />
     <ClInclude Include="Engine\Systems\Loaders\MediaLoader.h" />
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h" />
+    <ClInclude Include="Project\Game\Player\Player.h" />
     <ClInclude Include="Project\Game\Player\PlayerMovement.h" />
     <ClInclude Include="Project\ProjectInitializer.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Engine\Renderer\Resources\BasicSquare.frag" />
-    <Text Include="Engine\Renderer\Resources\BasicSquare.vert" />
+    <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.frag" />
+    <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -151,7 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Brian\Desktop\LearnC++\EngineBuilding\LearnSDL\libraries\glm;C:\Users\Brian\Desktop\LearnC++\EngineBuilding\LearnSDL\libraries\SDL2-2.30.6\include;$(SolutionDir)\LearnSDL\Engine;C:\Users\Brian\Desktop\LearnC++\EngineBuilding\LearnSDL\libraries\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libraries\glm;$(SolutionDir)\libraries\SDL2-2.30.6\include;$(SolutionDir)LearnSDL\Engine;$(SolutionDir)libraries\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>

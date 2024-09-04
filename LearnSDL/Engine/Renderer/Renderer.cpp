@@ -15,23 +15,6 @@
 Renderer::Renderer()
 	: debugOutput(true), drawer(true)
 {
-    // Initialize member variables
-    GLfloat tempVertices[] = {
-        -0.1f,  0.1f, 0.0f,  // Top-left
-        -0.1f, -0.1f, 0.0f,  // Bottom-left
-         0.1f, -0.1f, 0.0f,  // Bottom-right
-         0.1f,  0.1f, 0.0f   // Top-right
-    };
-
-    GLuint tempIndices[] = {
-        0, 1, 2,  // First triangle
-        2, 3, 0   // Second triangle
-    };
-
-    // Copy temp arrays to member variables
-    std::copy(std::begin(tempVertices), std::end(tempVertices), std::begin(vertices));
-    std::copy(std::begin(tempIndices), std::end(tempIndices), std::begin(indices));
-
     // Set the attributes for OpenGL
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -44,12 +27,10 @@ Renderer::Renderer()
     }
 }
 
-void Renderer::StartRenderer()
+void Renderer::Init()
 {  
-    drawer.initializeDrawer(vertices, indices, sizeof(vertices), sizeof(indices));
-    drawer.SetAttributePointers();
-
-    shader = std::make_unique<Shader>("./Engine/Renderer/Resources/BasicSquare.vert", "./Engine/Renderer/Resources/BasicSquare.frag");
+    drawer.initializeSquareVAO();
+    //shader = std::make_unique<Shader>("./Engine/Renderer/Shaders/Resources/BasicSquare.vert", "./Engine/Renderer/Shaders/Resources/BasicSquare.frag");
     
     debugOutput.outputGreenText("Start Render");
     debugOutput.outputGreenText("**SUCCESS**::INITIALIZERENDERER::BUFFERSLOADED::[Engine/Renderer/InitializeRenderer.h]");
@@ -59,19 +40,5 @@ void Renderer::TerminateRenderer()
 {
     drawer.DeleteDrawer();
 
-    if (shader)
-    {
-        glDeleteProgram(shader->getProgram());
-    }
-
     debugOutput.outputGreenText("**SUCCESS**::TERMINATERENDERER::CLOSING::[Engine/Renderer/InitializeRenderer.h]");
-}
-
-void Renderer::RenderScene(SDL_Window* gWindow)
-{
-    if (shader)
-    {
-        shader->use();
-    }
-    drawer.Draw(gWindow);
 }

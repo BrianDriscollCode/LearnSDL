@@ -17,11 +17,6 @@ public:
 
 	KeyPress currentXMovementState = NONE;
 	KeyPress currentYMovementState = NONE;
-	//void OnInit();
-
-
-	KeyPress GetXMovementState();
-	KeyPress GetYMovementState();
 };
 
 #endif

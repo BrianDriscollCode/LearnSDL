@@ -19,6 +19,9 @@
 #include "../Engine/Systems/Managers/CallbackEventManager.h"
 #include "../Engine/Systems/Managers/SubEmitEventManager.h"
 
+// Helpers
+#include "../Engine/Systems/Helper/ReferenceHelper.h"
+
 // Utilities
 #include "../Engine/Utilities/Enum/KeyPress.h";
 
@@ -98,7 +101,7 @@ bool init()
 
 			if (glewInitialized)
 			{
-				renderer.StartRenderer();
+				//renderer.StartRenderer();
 			}
 		}
 	}
@@ -117,7 +120,7 @@ void close()
 
 int main(int argc, char* args[]) {
 	
-	// Initialize SDL and create window, load media, etc.
+	// Initialize SDL and create window, load media, start renderer, etc.
 	bool intializationSuccess = init();
 
 	if (!intializationSuccess) {
@@ -125,55 +128,61 @@ int main(int argc, char* args[]) {
 	}
 	else {
 		bool quit = false;
+		// Initiate SDL Event
 		SDL_Event eventObject;
 
-		// Initiate Systems
+		// Initiate Engine Systems
 		InputHandler& inputHandler = systemManager.inputHandler;
 		CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
 		SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
 
+		// Initiate Helpers
+		ReferenceHelper::RegisterWindow(gWindow);
+		ReferenceHelper::RegisterRenderer(&renderer);
+
 		// Initialize Game Project
-		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer);
+		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer, gWindow);
 		projectInitializer.InitializeGameCode();
+		projectInitializer.InitializeLevel();
 
 		// Close Engine Logic
 		inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
 
+		// Framerate Variables
 		const int FPS = 60;
 		const int frameDelay = 1000 / FPS;
-
 		Uint32 frameStart;
 		int frameTime;
 
-		//SDL_EventState(SDL_KEYDOWN, SDL_IGNORE);
+		// Renderer Shapes
+		renderer.Init();
 
 		// Game Loop
 		while (!quit) {
 			frameStart = SDL_GetTicks();
 
+			// Poll for events
 			while (SDL_PollEvent(&eventObject) != 0)
 			{
 				callbackEventManager.processEvent(eventObject);
 				inputHandler.handleEvents(eventObject);
-				projectInitializer.InLoopCode(eventObject);
+				projectInitializer.InPollCode(eventObject);
+			}
+
+			projectInitializer.InLoopCode();
+			//SDL_GL_SwapWindow(gWindow);
+
+			// Draw shapes from renderer
+			//renderer.drawer.DrawSquare(gWindow);
+
+			// Manage framerate
+			frameTime = SDL_GetTicks() - frameStart;
+			if (frameDelay > frameTime) {
+				SDL_Delay(frameDelay - frameTime);
 			}
 
 			// Clear the color buffer
 			glClear(GL_COLOR_BUFFER_BIT);
-
-			KeyPress movementX = projectInitializer.playerMovement.GetXMovementState();
-			KeyPress movementY = projectInitializer.playerMovement.GetYMovementState();
-
-			renderer.drawer.MoveSquare(movementX, movementY);
-
-			// Draw shapes from renderer
-			renderer.RenderScene(gWindow);
-
-			frameTime = SDL_GetTicks() - frameStart;
-
-			if (frameDelay > frameTime) {
-				SDL_Delay(frameDelay - frameTime);
-			}
 		}
 	}
 

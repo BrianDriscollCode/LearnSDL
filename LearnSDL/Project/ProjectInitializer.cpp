@@ -6,14 +6,17 @@ ProjectInitializer::ProjectInitializer(
 	InputHandler& inputHandlerRef,
 	SubEmitEventManager& subEmitEventManagerRef,
 	SDL_Event& eventObjectRef,
-	Renderer& rendererRef
+	Renderer& rendererRef,
+	SDL_Window* gWindowRef
 )
-	: inputHandler(inputHandlerRef),
+	:inputHandler(inputHandlerRef),
 	subEmitEventManager(subEmitEventManagerRef),
 	eventObject(eventObjectRef),
 	renderer(rendererRef),
 	debugOutput(true),
-	playerMovement(inputHandlerRef)
+	playerMovement(inputHandlerRef),
+	gWindow(gWindowRef)
+
 {
 
 }
@@ -26,9 +29,32 @@ void ProjectInitializer::InitializeGameCode()
 	//playerMovement.OnInit();
 }
 
-void ProjectInitializer::InLoopCode(SDL_Event& eventObject)
+void ProjectInitializer::InPollCode(SDL_Event& eventObject)
 {
+	//Entity player;
 	playerMovement.MoveInput(eventObject);
+	//renderer.drawer.DrawSquare(gWindow, player);
+	// NEED TO FIGURE OUT
+	// HOW TO GET SCRIPT TO:
+	//	1. has ref to player
+	//  2. Can run drawsquare, need hook that has ref to gWindow
+	
 }
+
+void ProjectInitializer::InLoopCode()
+{
+	KeyPress movementX = playerMovement.currentXMovementState;
+	KeyPress movementY = playerMovement.currentYMovementState;
+
+	player.DrawSelf();
+	player.playerObject.MoveEntity();
+	//renderer.drawer.MoveSquare(movementX, movementY);
+}
+
+void ProjectInitializer::InitializeLevel()
+{
+	
+}
+
 
 
