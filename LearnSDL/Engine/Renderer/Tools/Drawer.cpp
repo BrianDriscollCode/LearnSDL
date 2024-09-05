@@ -5,7 +5,9 @@
 
 // Drawer constructor
 Drawer::Drawer(bool activate)
-    : debugOutput(true), squareVAO(0), VBO(0), EBO(0), offsetX(0.1f), offsetY(0.1f), transformHandler() {}
+    : debugOutput(true), squareVAO(0), VBO(0), EBO(0), offsetX(0.1f), offsetY(0.1f)
+{
+}
 
 // Initialize Drawer
 void Drawer::initializeSquareVAO() {
@@ -64,28 +66,6 @@ void Drawer::DrawSquare(SDL_Window* gWindow, Entity player) {
     SDL_GL_SwapWindow(gWindow);
 }
 
-// Move square (if applicable)
-
-//void Drawer::MoveSquare()
-//{
-//
-//}
- 
-
-void Drawer::MoveSquare(KeyPress directionX, KeyPress directionY) {
-    transformHandler.MoveObject(directionX, directionY);
-
-    GLfloat updatedVertices[12];
-    const GLfloat* verticesFromHandler = transformHandler.GetVertices();
-
-    for (int i = 0; i < 12; ++i) {
-        updatedVertices[i] = verticesFromHandler[i];
-    }
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(updatedVertices), updatedVertices); // Use glBufferSubData for partial updates
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
 
 // Delete Drawer
 void Drawer::DeleteDrawer() {

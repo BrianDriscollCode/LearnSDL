@@ -1,11 +1,11 @@
 #include "PlayerMovement.h"
 
-PlayerMovement::PlayerMovement(InputHandler& inputHandlerRef)
-    : inputHandler(inputHandlerRef), debugOutput(true)
+PlayerMovement::PlayerMovement()
+    : debugOutput(true)
 {
 }
 
-void PlayerMovement::MoveInput(SDL_Event& eventObject)
+void PlayerMovement::MoveInput()
 {
 
     // Get Keyboard input

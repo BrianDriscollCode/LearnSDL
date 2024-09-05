@@ -24,6 +24,30 @@ Renderer* ReferenceHelper::GetRenderer()
 	return Instance().renderer;
 }
 
+// Register and manage DeltaTime
+
+void ReferenceHelper::RegisterDeltaTime(float* deltaTime)
+{
+	Instance().deltaTime = deltaTime;
+}
+
+float* ReferenceHelper::GetDeltaTime()
+{
+	return Instance().deltaTime;
+}
+
+// Registert and manage EventObject
+
+void ReferenceHelper::RegisterEventObject(SDL_Event* eventObject)
+{
+	Instance().eventObject = eventObject;
+}
+
+SDL_Event* ReferenceHelper::GetEventObject()
+{
+	return Instance().eventObject;
+}
+
 ReferenceHelper& ReferenceHelper::Instance()
 {
 	static ReferenceHelper instance;

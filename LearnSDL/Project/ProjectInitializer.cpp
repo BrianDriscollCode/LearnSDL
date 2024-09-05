@@ -14,9 +14,8 @@ ProjectInitializer::ProjectInitializer(
 	eventObject(eventObjectRef),
 	renderer(rendererRef),
 	debugOutput(true),
-	playerMovement(inputHandlerRef),
+	playerMovement(),
 	gWindow(gWindowRef)
-
 {
 
 }
@@ -32,7 +31,7 @@ void ProjectInitializer::InitializeGameCode()
 void ProjectInitializer::InPollCode(SDL_Event& eventObject)
 {
 	//Entity player;
-	playerMovement.MoveInput(eventObject);
+	//playerMovement.MoveInput(eventObject);
 	//renderer.drawer.DrawSquare(gWindow, player);
 	// NEED TO FIGURE OUT
 	// HOW TO GET SCRIPT TO:
@@ -46,8 +45,7 @@ void ProjectInitializer::InLoopCode()
 	KeyPress movementX = playerMovement.currentXMovementState;
 	KeyPress movementY = playerMovement.currentYMovementState;
 
-	player.DrawSelf();
-	player.playerObject.MoveEntity();
+	player.Tick();
 	//renderer.drawer.MoveSquare(movementX, movementY);
 }
 

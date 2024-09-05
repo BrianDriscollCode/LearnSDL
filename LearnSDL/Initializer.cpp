@@ -7,6 +7,7 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <SDL_opengl.h>
+#include <chrono>
 
 // Rendering Internal
 #include "../Engine/Renderer/Renderer.h";
@@ -18,6 +19,7 @@
 #include "../Engine/Systems/Handlers/WindowHandler.h"
 #include "../Engine/Systems/Managers/CallbackEventManager.h"
 #include "../Engine/Systems/Managers/SubEmitEventManager.h"
+#include "../Engine/Debug/DebugOutput.h"
 
 // Helpers
 #include "../Engine/Systems/Helper/ReferenceHelper.h"
@@ -118,74 +120,82 @@ void close()
 	SDL_Quit();
 }
 
+
 int main(int argc, char* args[]) {
-	
-	// Initialize SDL and create window, load media, start renderer, etc.
-	bool intializationSuccess = init();
+    // Initialize SDL and create window, load media, start renderer, etc.
+    bool initializationSuccess = init();
 
-	if (!intializationSuccess) {
-		printf("Failed to initialize!\n");
-	}
-	else {
-		bool quit = false;
-		// Initiate SDL Event
-		SDL_Event eventObject;
+    if (!initializationSuccess) {
+        printf("Failed to initialize!\n");
+    }
+    else {
+        bool quit = false;
+        SDL_Event eventObject;
 
-		// Initiate Engine Systems
-		InputHandler& inputHandler = systemManager.inputHandler;
-		CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
-		SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
+        InputHandler& inputHandler = systemManager.inputHandler;
+        CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
+        SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
+        DebugOutput debugOutput(true);
 
-		// Initiate Helpers
-		ReferenceHelper::RegisterWindow(gWindow);
-		ReferenceHelper::RegisterRenderer(&renderer);
 
-		// Initialize Game Project
-		ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer, gWindow);
-		projectInitializer.InitializeGameCode();
-		projectInitializer.InitializeLevel();
+        // Framerate Variables
+        const int FPS = 60;
+        const int frameDelay = 1000 / FPS;
+        auto previousTime = std::chrono::high_resolution_clock::now();
+        float deltaTimeSeconds = 0.0f;
 
-		// Close Engine Logic
-		inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
+        // Initiate Helper references
+        ReferenceHelper::RegisterWindow(gWindow);
+        ReferenceHelper::RegisterRenderer(&renderer);
+        ReferenceHelper::RegisterDeltaTime(&deltaTimeSeconds);
+        ReferenceHelper::RegisterEventObject(&eventObject);
 
-		// Framerate Variables
-		const int FPS = 60;
-		const int frameDelay = 1000 / FPS;
-		Uint32 frameStart;
-		int frameTime;
+        // Initialize Game Project
+        ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer, gWindow);
+        projectInitializer.InitializeGameCode();
+        projectInitializer.InitializeLevel();
 
-		// Renderer Shapes
-		renderer.Init();
+        // Close Engine Logic
+        inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
 
-		// Game Loop
-		while (!quit) {
-			frameStart = SDL_GetTicks();
+        // Renderer Shapes
+        renderer.Init();
 
-			// Poll for events
-			while (SDL_PollEvent(&eventObject) != 0)
-			{
-				callbackEventManager.processEvent(eventObject);
-				inputHandler.handleEvents(eventObject);
-				projectInitializer.InPollCode(eventObject);
-			}
+        // Game Loop
+        while (!quit) {
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<float> deltaTime = currentTime - previousTime;
+            previousTime = currentTime;
+            deltaTimeSeconds = deltaTime.count();
+ 
+            
+            debugOutput.outputRedText(std::to_string(deltaTimeSeconds).c_str());
+            // Update ReferenceHelper with the current deltaTime
+            *ReferenceHelper::GetDeltaTime() = deltaTimeSeconds;
 
-			projectInitializer.InLoopCode();
-			//SDL_GL_SwapWindow(gWindow);
+            // Poll for events
+            while (SDL_PollEvent(&eventObject) != 0) {
+                callbackEventManager.processEvent(eventObject);
+                inputHandler.handleEvents(eventObject);
+                projectInitializer.InPollCode(eventObject);
+            }
 
-			// Draw shapes from renderer
-			//renderer.drawer.DrawSquare(gWindow);
+            projectInitializer.InLoopCode();
 
-			// Manage framerate
-			frameTime = SDL_GetTicks() - frameStart;
-			if (frameDelay > frameTime) {
-				SDL_Delay(frameDelay - frameTime);
-			}
+            // Manage framerate
+            auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - previousTime).count();
+            if (frameDelay > elapsedTime) {
+                SDL_Delay(frameDelay - elapsedTime);
+            }
 
-			// Clear the color buffer
-			glClear(GL_COLOR_BUFFER_BIT);
-		}
-	}
+            // Clear the color buffer
+            glClear(GL_COLOR_BUFFER_BIT);
 
-	close();
-	return 0;
+            // Swap window buffer (uncomment if using double buffering)
+            // SDL_GL_SwapWindow(gWindow);
+        }
+    }
+
+    close();
+    return 0;
 }

@@ -15,6 +15,12 @@ public:
 	static void RegisterRenderer(Renderer* renderer);
 	static Renderer* GetRenderer();
 
+	static void RegisterDeltaTime(float* deltaTime);
+	static float* GetDeltaTime();
+
+	static void RegisterEventObject(SDL_Event* eventObject);
+	static SDL_Event* GetEventObject();
+
 private:
 	static ReferenceHelper& Instance();
 
@@ -22,6 +28,8 @@ private:
 
 	SDL_Window* gWindow = nullptr;
 	Renderer* renderer = nullptr;
+	float* deltaTime = nullptr;
+	SDL_Event* eventObject = nullptr;
 };
 
 #endif

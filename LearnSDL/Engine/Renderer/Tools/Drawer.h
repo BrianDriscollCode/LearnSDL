@@ -6,7 +6,6 @@
 #include <SDL.h>
 
 #include "../Engine/Debug/DebugOutput.h"
-#include "../Tools/Handlers/TransformHandler.h"
 
 // Systems
 
@@ -34,7 +33,7 @@ public:
     float offsetX;
     float offsetY;
     DebugOutput debugOutput;
-    TransformHandler transformHandler;
+
     std::unique_ptr<Shader> squareShader;
 
     Drawer(bool activate);
@@ -42,8 +41,6 @@ public:
     void initializeSquareVAO();
 
     void DrawSquare(SDL_Window* gWindow, Entity player);
-
-    void MoveSquare(KeyPress directionX, KeyPress directionY);
 
     void DeleteDrawer();
 };

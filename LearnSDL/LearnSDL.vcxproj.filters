@@ -66,9 +66,6 @@
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Renderer\Tools\Handlers\TransformHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Utilities\Enum\KeyPress.h">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -77,9 +74,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Renderer\Tools\Resources\ShapeLibrary.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Renderer\Tools\DrawerV2.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Entity\Entity.cpp">
       <Filter>Source Files</Filter>
@@ -134,13 +128,7 @@
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Renderer\Tools\Handlers\TransformHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Project\Game\Player\PlayerMovement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Renderer\Tools\DrawerV2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Entity\Entity.h">

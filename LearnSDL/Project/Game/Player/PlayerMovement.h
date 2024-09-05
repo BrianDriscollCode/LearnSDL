@@ -1,19 +1,23 @@
 #ifndef PLAYERMOVEMENT_H
 #define PLAYERMOVEMENT_H
 
-#include "../Engine/Systems/Handlers/InputHandler.h"
+// Engine Systems
 #include "../Engine/Utilities/Enum/KeyPress.h"
-
 #include "../Engine/Debug/DebugOutput.h"
+
+// References
+
+//#include "../Engine/Systems/Helper/ReferenceHelper.h"
+
+#include <SDL.h>
 
 class PlayerMovement
 {
 public:
-	PlayerMovement(InputHandler& inputHandlerRef);
-	InputHandler& inputHandler;
+	PlayerMovement();
 	DebugOutput debugOutput;
 
-	void MoveInput(SDL_Event& eventObject);
+	void MoveInput();
 
 	KeyPress currentXMovementState = NONE;
 	KeyPress currentYMovementState = NONE;

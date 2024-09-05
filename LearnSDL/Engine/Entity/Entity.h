@@ -5,6 +5,8 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
+#include "../Engine/Utilities/Enum/KeyPress.h"
+
 class Entity
 {
 public:
@@ -12,8 +14,7 @@ public:
 
 	Entity();
 
-
-	void MoveEntity();
+	void MoveEntity(float deltaTime, KeyPress directionX, KeyPress directionY);
 	//void update(float deltaTime);
 };
 
