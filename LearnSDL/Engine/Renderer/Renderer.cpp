@@ -12,8 +12,8 @@
 #include "./Tools/Drawer.h"
 
 
-Renderer::Renderer()
-	: debugOutput(true), drawer(true)
+Renderer::Renderer(SDL_Window* gWindowRef)
+	: debugOutput(true), drawer(true, gWindowRef), gWindow(gWindowRef)
 {
     // Set the attributes for OpenGL
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);

@@ -22,7 +22,7 @@
 #include "../Engine/Debug/DebugOutput.h"
 
 // Helpers
-#include "../Engine/Systems/Helper/ReferenceHelper.h"
+#include "../Engine/Utilities/Helper/ReferenceHelper.h"
 
 // Utilities
 #include "../Engine/Utilities/Enum/KeyPress.h";
@@ -48,9 +48,6 @@ SDL_Window* gWindow = NULL;
 
 // Load Systems made with SDL
 SystemManager systemManager;
-
-// OpenGL Rendering
-Renderer renderer;
 
 bool initGLEW()
 {
@@ -111,10 +108,10 @@ bool init()
 	return success;
 }
 
-void close()
+void close(Renderer* renderer)
 {
 	// Terminate renderer, window, and SDL
-	renderer.TerminateRenderer();
+	renderer->TerminateRenderer();
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
 	SDL_Quit();
@@ -124,12 +121,18 @@ void close()
 int main(int argc, char* args[]) {
     // Initialize SDL and create window, load media, start renderer, etc.
     bool initializationSuccess = init();
+	
 
     if (!initializationSuccess) {
         printf("Failed to initialize!\n");
+		return -1;
     }
-    else {
+    
         bool quit = false;
+
+		// OpenGL Rendering
+		Renderer renderer(gWindow);
+
         SDL_Event eventObject;
 
         InputHandler& inputHandler = systemManager.inputHandler;
@@ -137,18 +140,17 @@ int main(int argc, char* args[]) {
         SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
         DebugOutput debugOutput(true);
 
-
-        // Framerate Variables
-        const int FPS = 60;
-        const int frameDelay = 1000 / FPS;
-        auto previousTime = std::chrono::high_resolution_clock::now();
-        float deltaTimeSeconds = 0.0f;
+		float alpha = 0.0f;
+		float frameTime = 0.0f;
+		float deltaTime = 0.0f;
 
         // Initiate Helper references
         ReferenceHelper::RegisterWindow(gWindow);
         ReferenceHelper::RegisterRenderer(&renderer);
-        ReferenceHelper::RegisterDeltaTime(&deltaTimeSeconds);
         ReferenceHelper::RegisterEventObject(&eventObject);
+		ReferenceHelper::RegisterAlphaTime(&alpha);
+		ReferenceHelper::RegisterDeltaTime(&deltaTime);
+ 
 
         // Initialize Game Project
         ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer, gWindow);
@@ -156,46 +158,78 @@ int main(int argc, char* args[]) {
         projectInitializer.InitializeLevel();
 
         // Close Engine Logic
-        inputHandler.setAction(SDLK_ESCAPE, []() { close(); });
+        inputHandler.setAction(SDLK_ESCAPE, [&renderer]() { close(&renderer); });
 
         // Renderer Shapes
         renderer.Init();
 
-        // Game Loop
-        while (!quit) {
-            auto currentTime = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<float> deltaTime = currentTime - previousTime;
-            previousTime = currentTime;
-            deltaTimeSeconds = deltaTime.count();
- 
-            
-            debugOutput.outputRedText(std::to_string(deltaTimeSeconds).c_str());
-            // Update ReferenceHelper with the current deltaTime
-            *ReferenceHelper::GetDeltaTime() = deltaTimeSeconds;
+		// 16.67 ms per frame
+		const float targetFrameTime = 1000.0f / 60.0f;
+		// warm up to stabilize frame rate
+		int warmupFrames = 10;
+		bool showFPS = false;
 
-            // Poll for events
-            while (SDL_PollEvent(&eventObject) != 0) {
-                callbackEventManager.processEvent(eventObject);
-                inputHandler.handleEvents(eventObject);
-                projectInitializer.InPollCode(eventObject);
-            }
+		while (!quit) {
+			// Start frame timing
+			// Captures the current time in milliseconds using SDL’s
+			Uint32 startTicks = SDL_GetTicks();
 
-            projectInitializer.InLoopCode();
+			// Poll for events
+			while (SDL_PollEvent(&eventObject) != 0) {
+				callbackEventManager.processEvent(eventObject);
+				inputHandler.handleEvents(eventObject);
+				projectInitializer.InPollCode(eventObject);
+			}
 
-            // Manage framerate
-            auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - previousTime).count();
-            if (frameDelay > elapsedTime) {
-                SDL_Delay(frameDelay - elapsedTime);
-            }
+			glClear(GL_COLOR_BUFFER_BIT);
+			// Game update logic
+			projectInitializer.InLoopCode();
+			renderer.drawer.EndDraw();
+			// Clear the color buffer
+			
 
-            // Clear the color buffer
-            glClear(GL_COLOR_BUFFER_BIT);
+			// End frame timing
+			Uint32 endTicks = SDL_GetTicks();
+			Uint64 endPerf = SDL_GetPerformanceCounter();
 
-            // Swap window buffer (uncomment if using double buffering)
-            // SDL_GL_SwapWindow(gWindow);
-        }
+			// Calculate deltaTime in seconds
+			deltaTime = (endTicks - startTicks) / 1000.0f;
+
+			// Update interval (fixed timestep for interpolation)
+			float updateInterval = 1.0f / 60.0f;  // 60 FPS fixed timestep
+
+			// Calculates the interpolation factor based on the frame time and fixed timestep. 
+			// This is used to smoothly interpolate between the last and current frame states. 
+			// endTicks - startTicks gives the elapsed time in performance counter units, and 
+			// dividing it by the product of SDL_GetPerformanceFrequency() and updateInterval 
+			// normalizes it to a value between 0 and 1.
+			alpha = (endTicks - startTicks) / (SDL_GetPerformanceFrequency() * updateInterval);
+
+			// Manage FPS: Delay if the frame time is less than target frame time
+			// Re-calculates the frame time in milliseconds, which is the time elapsed since startTicks.
+			float frameTime = (endTicks - startTicks);
+			
+			if (warmupFrames > 0)
+			{
+				warmupFrames--;
+			}
+			else if (frameTime < targetFrameTime) 
+			{
+				SDL_Delay(targetFrameTime - frameTime);
+			}
+
+			// Calculate and display FPS
+			if (showFPS)
+			{
+				float actualFrameTime = SDL_GetTicks() - startTicks; // Actual frame time after delay
+				float fps = 1000.0f / actualFrameTime; // FPS is 1000 ms divided by frame time in ms
+				std::cout << "Current FPS: " << fps << std::endl;
+			}
+			
+			
+		
     }
 
-    close();
+    close(&renderer);
     return 0;
 }

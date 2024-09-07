@@ -1,17 +1,20 @@
 #include "Player.h"
 
 Player::Player()
-	: entity(), gWindow(), debugOutput(true), playerMovement()
+	: entity(glm::vec3(0.0f, 0.0f, 0.0f)), debugOutput(true), playerMovementInput()
 {
 };
 
 void Player::Tick()
 {
-	DrawSelf();
 
+	// Connect to states for movement and input
+	playerMovementInput.MoveInput();
+
+	// move player across screen using interpolation and GLM
 	float deltaTime = *ReferenceHelper::GetDeltaTime();
-	playerMovement.MoveInput();
-	entity.MoveEntity(deltaTime, playerMovement.currentXMovementState, playerMovement.currentYMovementState);
+	float alpha = *ReferenceHelper::GetAlphaTime();
+	entity.MoveEntity(deltaTime, alpha, playerMovementInput.currentXMovementState, playerMovementInput.currentYMovementState);
 
 }
 
@@ -21,6 +24,7 @@ void Player::DrawSelf()
 	Renderer* renderer = ReferenceHelper::GetRenderer();
 
 	renderer->drawer.DrawSquare(gWindow, entity);
+	//renderer->drawer.EndDraw();
 	
 }
 

@@ -14,8 +14,9 @@
 #include "../Engine/Utilities/Enum/KeyPress.h"
 
 // Game Scripts
-#include "../Project/Game/Player/PlayerMovement.h"
+#include "../Project/Game/Player/PlayerMovementInput.h"
 #include "../Project/Game/Player/Player.h"
+#include "../Project/Game/Player/RegularBox.h"
 
 // Utilities
 #include "../Engine/Debug/DebugOutput.h"
@@ -37,7 +38,7 @@ public:
 	SubEmitEventManager& subEmitEventManager;
 	Renderer& renderer;
 	SDL_Event& eventObject;
-	PlayerMovement playerMovement;
+	PlayerMovementInput playerMovementInput;
 
 	// Window
 	
@@ -48,6 +49,9 @@ public:
 
 	// Player
 	Player player;
+
+	// Objects
+	RegularBox regularBox;
 
 	void InitializeGameCode();
 	void InPollCode(SDL_Event& eventObject);

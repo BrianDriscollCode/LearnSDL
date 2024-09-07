@@ -33,14 +33,18 @@ public:
     float offsetX;
     float offsetY;
     DebugOutput debugOutput;
+    SDL_Window* gWindow;
+    
 
     std::unique_ptr<Shader> squareShader;
 
-    Drawer(bool activate);
+    Drawer(bool activate, SDL_Window* gWindow);
 
     void initializeSquareVAO();
 
     void DrawSquare(SDL_Window* gWindow, Entity player);
+
+    void EndDraw();
 
     void DeleteDrawer();
 };

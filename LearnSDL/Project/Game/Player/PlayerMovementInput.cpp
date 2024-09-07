@@ -1,11 +1,11 @@
-#include "PlayerMovement.h"
+#include "PlayerMovementInput.h"
 
-PlayerMovement::PlayerMovement()
+PlayerMovementInput::PlayerMovementInput()
     : debugOutput(true)
 {
 }
 
-void PlayerMovement::MoveInput()
+void PlayerMovementInput::MoveInput()
 {
 
     // Get Keyboard input

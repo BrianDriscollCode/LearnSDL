@@ -11,10 +11,10 @@
 
 #include <SDL.h>
 
-class PlayerMovement
+class PlayerMovementInput
 {
 public:
-	PlayerMovement();
+	PlayerMovementInput();
 	DebugOutput debugOutput;
 
 	void MoveInput();

@@ -1,34 +1,39 @@
 
 #include "Entity.h"
-
-
 #include <iostream>
-Entity::Entity()
+
+Entity::Entity(glm::vec3 startPosition)
 {
-	position = glm::vec3(0.0f, 0.0f, 0.0f);
+	actualPosition = startPosition;
+	currentPosition = startPosition;
 }
 
-void Entity::MoveEntity(float deltaTime, KeyPress directionX, KeyPress directionY)
+void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY)
 {
+
+	prevPosition = currentPosition;
 
 	if (directionX == RIGHT)
 	{
-		position.x += 0.5f * deltaTime;
+		currentPosition.x += 1.0f * deltaTime;
 	}
 	else if (directionX == LEFT)
 	{
-		position.x -= 0.5f * deltaTime;
+		currentPosition.x -= 1.0f * deltaTime;
 	}
 
 	if (directionY == UP)
 	{
-		position.y += 0.5f * deltaTime;
+		currentPosition.y += 1.0f * deltaTime;
 	}
 	else if (directionY == DOWN)
 	{
-		position.y -= 0.5f * deltaTime;
+		currentPosition.y -= 1.0f * deltaTime;
 	}
-	//std::cout << "Delta Time: " << deltaTime * 0.5f << std::endl;
+
+	//std::cout << "DeltaTime: " << deltaTime << std::endl;
+	actualPosition.x = prevPosition.x + alpha * (currentPosition.x - prevPosition.x);
+	actualPosition.y = prevPosition.y + alpha * (currentPosition.y - prevPosition.y);
 }
 
 

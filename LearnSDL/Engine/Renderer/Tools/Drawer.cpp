@@ -4,8 +4,8 @@
 #include "../Engine/Debug/DebugOutput.h"
 
 // Drawer constructor
-Drawer::Drawer(bool activate)
-    : debugOutput(true), squareVAO(0), VBO(0), EBO(0), offsetX(0.1f), offsetY(0.1f)
+Drawer::Drawer(bool activate, SDL_Window* gWindowRef)
+    : debugOutput(true), squareVAO(0), VBO(0), EBO(0), offsetX(0.1f), offsetY(0.1f), gWindow(gWindowRef)
 {
 }
 
@@ -51,11 +51,11 @@ void Drawer::initializeSquareVAO() {
 
 // Draw
 
-void Drawer::DrawSquare(SDL_Window* gWindow, Entity player) {
+void Drawer::DrawSquare(SDL_Window* gWindow, Entity entity) {
 
     //glm::vec3 boxPosition = glm::vec3(0.5f, 0.5f, 0.0f);
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, player.position);
+    model = glm::translate(model, entity.actualPosition);
 
     GLint modelLoc = glGetUniformLocation(squareShader->getProgram(), "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -63,9 +63,14 @@ void Drawer::DrawSquare(SDL_Window* gWindow, Entity player) {
     squareShader->use();
     glBindVertexArray(squareVAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    SDL_GL_SwapWindow(gWindow);
+
+
 }
 
+void Drawer::EndDraw()
+{
+    SDL_GL_SwapWindow(gWindow);
+}
 
 // Delete Drawer
 void Drawer::DeleteDrawer() {

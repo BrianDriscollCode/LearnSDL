@@ -69,7 +69,7 @@
     <ClCompile Include="Engine\Utilities\Enum\KeyPress.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Game\Player\PlayerMovement.cpp">
+    <ClCompile Include="Project\Game\Player\PlayerMovementInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Renderer\Tools\Resources\ShapeLibrary.h">
@@ -81,10 +81,13 @@
     <ClCompile Include="Engine\Entity\EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Systems\Helper\ReferenceHelper.cpp">
+    <ClCompile Include="Engine\Utilities\Helper\ReferenceHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Project\Game\Player\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\Player\RegularBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,7 +131,7 @@
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Game\Player\PlayerMovement.h">
+    <ClInclude Include="Project\Game\Player\PlayerMovementInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Entity\Entity.h">
@@ -137,10 +140,13 @@
     <ClInclude Include="Engine\Entity\EntityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Systems\Helper\ReferenceHelper.h">
+    <ClInclude Include="Engine\Utilities\Helper\ReferenceHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Project\Game\Player\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\Player\RegularBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

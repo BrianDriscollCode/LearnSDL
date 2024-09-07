@@ -14,7 +14,7 @@ ProjectInitializer::ProjectInitializer(
 	eventObject(eventObjectRef),
 	renderer(rendererRef),
 	debugOutput(true),
-	playerMovement(),
+	playerMovementInput(),
 	gWindow(gWindowRef)
 {
 
@@ -42,10 +42,15 @@ void ProjectInitializer::InPollCode(SDL_Event& eventObject)
 
 void ProjectInitializer::InLoopCode()
 {
-	KeyPress movementX = playerMovement.currentXMovementState;
-	KeyPress movementY = playerMovement.currentYMovementState;
+	KeyPress movementX = playerMovementInput.currentXMovementState;
+	KeyPress movementY = playerMovementInput.currentYMovementState;
 
 	player.Tick();
+	regularBox.Tick();
+
+
+	player.DrawSelf();
+	regularBox.DrawSelf();
 	//renderer.drawer.MoveSquare(movementX, movementY);
 }
 

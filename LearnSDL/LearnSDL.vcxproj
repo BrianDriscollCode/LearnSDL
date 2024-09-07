@@ -27,7 +27,7 @@
     <ClCompile Include="Engine\Renderer\Tools\Resources\ShapeLibrary.h" />
     <ClCompile Include="Engine\Systems\Handlers\InputHandler.cpp" />
     <ClCompile Include="Engine\Systems\Handlers\SetControlsHandler.cpp" />
-    <ClCompile Include="Engine\Systems\Helper\ReferenceHelper.cpp" />
+    <ClCompile Include="Engine\Utilities\Helper\ReferenceHelper.cpp" />
     <ClCompile Include="Engine\Systems\Managers\CallbackEventManager.cpp" />
     <ClCompile Include="Engine\Systems\Managers\EventType.h" />
     <ClCompile Include="Engine\Systems\Managers\SubEmitEventManager.cpp" />
@@ -40,7 +40,8 @@
     <ClCompile Include="Engine\Systems\Loaders\SurfaceLoader.cpp" />
     <ClCompile Include="LeftOver.cpp" />
     <ClCompile Include="Project\Game\Player\Player.cpp" />
-    <ClCompile Include="Project\Game\Player\PlayerMovement.cpp" />
+    <ClCompile Include="Project\Game\Player\PlayerMovementInput.cpp" />
+    <ClCompile Include="Project\Game\Player\RegularBox.cpp" />
     <ClCompile Include="Project\ProjectInitializer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +52,7 @@
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
-    <ClInclude Include="Engine\Systems\Helper\ReferenceHelper.h" />
+    <ClInclude Include="Engine\Utilities\Helper\ReferenceHelper.h" />
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />
     <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h" />
     <ClInclude Include="Engine\Systems\SystemManager.h" />
@@ -60,7 +61,8 @@
     <ClInclude Include="Engine\Systems\Loaders\MediaLoader.h" />
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h" />
     <ClInclude Include="Project\Game\Player\Player.h" />
-    <ClInclude Include="Project\Game\Player\PlayerMovement.h" />
+    <ClInclude Include="Project\Game\Player\PlayerMovementInput.h" />
+    <ClInclude Include="Project\Game\Player\RegularBox.h" />
     <ClInclude Include="Project\ProjectInitializer.h" />
   </ItemGroup>
   <ItemGroup>

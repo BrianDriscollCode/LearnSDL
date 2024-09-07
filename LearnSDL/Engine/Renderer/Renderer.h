@@ -18,9 +18,10 @@ public:
     DebugOutput debugOutput;
     Drawer drawer;
     std::unique_ptr<Shader> shader;
+    SDL_Window* gWindow;
 
     // Constructor that initializes VAO, VBO, and shaderProgram
-    Renderer();
+    Renderer(SDL_Window* gWindowRef);
 
     void Init();
     void TerminateRenderer();
