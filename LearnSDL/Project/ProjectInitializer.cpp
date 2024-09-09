@@ -48,9 +48,8 @@ void ProjectInitializer::InLoopCode()
 	player.Tick();
 	regularBox.Tick();
 
-
-	player.DrawSelf();
 	regularBox.DrawSelf();
+	player.DrawSelf();
 	//renderer.drawer.MoveSquare(movementX, movementY);
 }
 

@@ -19,6 +19,7 @@
 #include "../Engine/Systems/Handlers/WindowHandler.h"
 #include "../Engine/Systems/Managers/CallbackEventManager.h"
 #include "../Engine/Systems/Managers/SubEmitEventManager.h"
+#include "../Engine/Systems/Entity/EntityManager.h"
 #include "../Engine/Debug/DebugOutput.h"
 
 // Helpers
@@ -67,6 +68,7 @@ bool init()
 {
 	//Initialization flag
 	bool success = true;
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		return false;
@@ -98,10 +100,13 @@ bool init()
 			
 			bool glewInitialized = initGLEW();
 
-			if (glewInitialized)
+			if (!glewInitialized)
 			{
 				//renderer.StartRenderer();
+				printf("Glew Failed!");
+				success = false;
 			}
+			
 		}
 	}
 
@@ -128,103 +133,106 @@ int main(int argc, char* args[]) {
 		return -1;
     }
     
-        bool quit = false;
+    bool quit = false;
 
-		// OpenGL Rendering
-		Renderer renderer(gWindow);
+	// OpenGL Rendering
+	Renderer renderer(gWindow);
 
-        SDL_Event eventObject;
+    SDL_Event eventObject;
 
-        InputHandler& inputHandler = systemManager.inputHandler;
-        CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
-        SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
-        DebugOutput debugOutput(true);
+    InputHandler& inputHandler = systemManager.inputHandler;
+    CallbackEventManager& callbackEventManager = systemManager.callbackEventManager;
+    SubEmitEventManager& subEmitEventManager = systemManager.subEmitEventManager;
+	EntityManager& entityManager = systemManager.entityManager;
+    DebugOutput debugOutput(true);
 
-		float alpha = 0.0f;
-		float frameTime = 0.0f;
-		float deltaTime = 0.0f;
+	// Framerate and interpolation variables
+	float alpha = 0.0f;
+	float frameTime = 0.0f;
+	float deltaTime = 0.0f;
 
-        // Initiate Helper references
-        ReferenceHelper::RegisterWindow(gWindow);
-        ReferenceHelper::RegisterRenderer(&renderer);
-        ReferenceHelper::RegisterEventObject(&eventObject);
-		ReferenceHelper::RegisterAlphaTime(&alpha);
-		ReferenceHelper::RegisterDeltaTime(&deltaTime);
+    // Initiate Helper references
+    ReferenceHelper::RegisterWindow(gWindow);
+    ReferenceHelper::RegisterRenderer(&renderer);
+    ReferenceHelper::RegisterEventObject(&eventObject);
+	ReferenceHelper::RegisterAlphaTime(&alpha);
+	ReferenceHelper::RegisterDeltaTime(&deltaTime);
+	ReferenceHelper::RegisterEntityManager(&entityManager);
  
 
-        // Initialize Game Project
-        ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer, gWindow);
-        projectInitializer.InitializeGameCode();
-        projectInitializer.InitializeLevel();
+    // Initialize Game Project
+    ProjectInitializer projectInitializer(inputHandler, subEmitEventManager, eventObject, renderer, gWindow);
+    projectInitializer.InitializeGameCode();
+    projectInitializer.InitializeLevel();
 
-        // Close Engine Logic
-        inputHandler.setAction(SDLK_ESCAPE, [&renderer]() { close(&renderer); });
+    // Close Engine Logic
+    inputHandler.setAction(SDLK_ESCAPE, [&renderer]() { close(&renderer); });
 
-        // Renderer Shapes
-        renderer.Init();
+    // Renderer Shapes
+    renderer.Init();
 
-		// 16.67 ms per frame
-		const float targetFrameTime = 1000.0f / 60.0f;
-		// warm up to stabilize frame rate
-		int warmupFrames = 10;
-		bool showFPS = false;
+	// 16.67 ms per frame
+	const float targetFrameTime = 1000.0f / 60.0f;
+	// warm up to stabilize frame rate
+	int warmupFrames = 10;
+	bool showFPS = false;
 
-		while (!quit) {
-			// Start frame timing
-			// Captures the current time in milliseconds using SDL’s
-			Uint32 startTicks = SDL_GetTicks();
+	while (!quit) {
+		// Start frame timing
+		// Captures the current time in milliseconds using SDL’s
+		Uint32 startTicks = SDL_GetTicks();
 
-			// Poll for events
-			while (SDL_PollEvent(&eventObject) != 0) {
-				callbackEventManager.processEvent(eventObject);
-				inputHandler.handleEvents(eventObject);
-				projectInitializer.InPollCode(eventObject);
-			}
+		// Poll for events
+		while (SDL_PollEvent(&eventObject) != 0) {
+			callbackEventManager.processEvent(eventObject);
+			inputHandler.handleEvents(eventObject);
+			projectInitializer.InPollCode(eventObject);
+		}
 
-			glClear(GL_COLOR_BUFFER_BIT);
-			// Game update logic
-			projectInitializer.InLoopCode();
-			renderer.drawer.EndDraw();
-			// Clear the color buffer
+		glClear(GL_COLOR_BUFFER_BIT);
+		// Game update logic
+		projectInitializer.InLoopCode();
+		renderer.drawer.EndDraw();
+		// Clear the color buffer
 			
 
-			// End frame timing
-			Uint32 endTicks = SDL_GetTicks();
-			Uint64 endPerf = SDL_GetPerformanceCounter();
+		// End frame timing
+		Uint32 endTicks = SDL_GetTicks();
+		Uint64 endPerf = SDL_GetPerformanceCounter();
 
-			// Calculate deltaTime in seconds
-			deltaTime = (endTicks - startTicks) / 1000.0f;
+		// Calculate deltaTime in seconds
+		deltaTime = (endTicks - startTicks) / 1000.0f;
 
-			// Update interval (fixed timestep for interpolation)
-			float updateInterval = 1.0f / 60.0f;  // 60 FPS fixed timestep
+		// Update interval (fixed timestep for interpolation)
+		float updateInterval = 1.0f / 60.0f;  // 60 FPS fixed timestep
 
-			// Calculates the interpolation factor based on the frame time and fixed timestep. 
-			// This is used to smoothly interpolate between the last and current frame states. 
-			// endTicks - startTicks gives the elapsed time in performance counter units, and 
-			// dividing it by the product of SDL_GetPerformanceFrequency() and updateInterval 
-			// normalizes it to a value between 0 and 1.
-			alpha = (endTicks - startTicks) / (SDL_GetPerformanceFrequency() * updateInterval);
+		// Calculates the interpolation factor based on the frame time and fixed timestep. 
+		// This is used to smoothly interpolate between the last and current frame states. 
+		// endTicks - startTicks gives the elapsed time in performance counter units, and 
+		// dividing it by the product of SDL_GetPerformanceFrequency() and updateInterval 
+		// normalizes it to a value between 0 and 1.
+		alpha = (endTicks - startTicks) / (SDL_GetPerformanceFrequency() * updateInterval);
 
-			// Manage FPS: Delay if the frame time is less than target frame time
-			// Re-calculates the frame time in milliseconds, which is the time elapsed since startTicks.
-			float frameTime = (endTicks - startTicks);
+		// Manage FPS: Delay if the frame time is less than target frame time
+		// Re-calculates the frame time in milliseconds, which is the time elapsed since startTicks.
+		float frameTime = (endTicks - startTicks);
 			
-			if (warmupFrames > 0)
-			{
-				warmupFrames--;
-			}
-			else if (frameTime < targetFrameTime) 
-			{
-				SDL_Delay(targetFrameTime - frameTime);
-			}
+		if (warmupFrames > 0)
+		{
+			warmupFrames--;
+		}
+		else if (frameTime < targetFrameTime) 
+		{
+			SDL_Delay(targetFrameTime - frameTime);
+		}
 
-			// Calculate and display FPS
-			if (showFPS)
-			{
-				float actualFrameTime = SDL_GetTicks() - startTicks; // Actual frame time after delay
-				float fps = 1000.0f / actualFrameTime; // FPS is 1000 ms divided by frame time in ms
-				std::cout << "Current FPS: " << fps << std::endl;
-			}
+		// Calculate and display FPS
+		if (showFPS)
+		{
+			float actualFrameTime = SDL_GetTicks() - startTicks; // Actual frame time after delay
+			float fps = 1000.0f / actualFrameTime; // FPS is 1000 ms divided by frame time in ms
+			std::cout << "Current FPS: " << fps << std::endl;
+		}
 			
 			
 		

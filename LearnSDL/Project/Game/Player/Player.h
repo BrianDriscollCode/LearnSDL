@@ -8,7 +8,7 @@
 
 
 // Engine Systems
-#include "../Engine/Entity/Entity.h"
+//#include "../Engine/Systems/Entity/Entity.h"
 #include "../Engine/Utilities/Helper/ReferenceHelper.h"
 #include "../Engine/Renderer/Renderer.h"
 #include "../Engine/Debug/DebugOutput.h"
@@ -16,17 +16,22 @@
 // Project Scripts
 #include "../Project/Game/Player/PlayerMovementInput.h"
 
+// Utilities
+#include "../Engine/Utilities/Enum/Color.h"
+
 class Player
 {
 public:
 	Player();
-	Entity entity;
+	//Entity entity;
 	DebugOutput debugOutput;
 	PlayerMovementInput playerMovementInput;
+	EntityManager* entityManager;
 
 	void Tick();
 
 	void DrawSelf();
+	int uniqueId;
 };
 
 #endif 

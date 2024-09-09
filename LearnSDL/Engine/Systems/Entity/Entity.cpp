@@ -36,5 +36,13 @@ void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPr
 	actualPosition.y = prevPosition.y + alpha * (currentPosition.y - prevPosition.y);
 }
 
+//void Entity::RegisterSelfToEntityManager()
+//{
+//	EntityManager* entityManager = ReferenceHelper::GetEntityManager();
+//	entityManager->RegisterEntity(std::string("object"), this);
+//	
+//}
+
+
 
 

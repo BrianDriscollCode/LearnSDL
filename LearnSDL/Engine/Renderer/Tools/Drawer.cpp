@@ -39,27 +39,62 @@ void Drawer::initializeSquareVAO() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    //transformHandler.SetInitialVertices(vertices);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind the VBO
     glBindVertexArray(0);
 
-    debugOutput.outputGreenText("**SUCCESS**::DRAWER::BUFFERS_LOADED::[Engine/Renderer/Drawer.h]");
+    debugOutput.outputGreenText("**SUCCESS**::DRAWER::SQUARE_BUFFERS_LOADED::[Engine/Renderer/Drawer.h]");
 }
 
 // Draw
 
-void Drawer::DrawSquare(SDL_Window* gWindow, Entity entity) {
+void Drawer::DrawSquare(Entity entity, Color color, glm::vec2 scale) 
+{
 
-    //glm::vec3 boxPosition = glm::vec3(0.5f, 0.5f, 0.0f);
+    // defines the 4x4 matrix for doing calculations via glm library
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, entity.actualPosition);
 
+    // Movement and scaling
+    model = glm::translate(model, entity.actualPosition);
+    model = glm::scale(model, glm::vec3(scale, 1.0f));
+
+    // Choose Color
+
+    glm::vec4 colorPicker = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+
+    switch (color)
+    {
+        case Color::BLUE:
+            colorPicker = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+            break;
+        case Color::GREEN:
+            colorPicker = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+            break;
+        case Color::YELLOW:
+            colorPicker = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
+            break;
+        case Color::ORANGE:
+            colorPicker = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
+            break;
+        case Color::RED:
+            colorPicker = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+            break;
+        default:
+            colorPicker = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+            break;
+    }
+
+    // Fragment Shader Color Edit
+    GLint colorLocation = glGetUniformLocation(squareShader->ID, "userColor");
+    glUseProgram(squareShader->ID);
+    glUniform4f(colorLocation, colorPicker.x, colorPicker.y, colorPicker.z, colorPicker.w);
+
+    // Vertex shader (transformation, scale, rotation)
     GLint modelLoc = glGetUniformLocation(squareShader->getProgram(), "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
+    // Draw the object
     squareShader->use();
     glBindVertexArray(squareVAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

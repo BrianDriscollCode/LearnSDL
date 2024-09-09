@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include "../Engine/Renderer/Renderer.h"
+//#include "../Engine/Systems/Entity/EntityManager.h"
 
 // How to get this reference helper easily passable, with references into project code?
 class ReferenceHelper
@@ -24,6 +25,9 @@ public:
 	static void RegisterDeltaTime(float* deltaTime);
 	static float* GetDeltaTime();
 
+	static void RegisterEntityManager(EntityManager* entityManager);
+	static EntityManager* GetEntityManager();
+
 private:
 	static ReferenceHelper& Instance();
 
@@ -34,6 +38,7 @@ private:
 	SDL_Event* eventObject = nullptr;
 	float* alphaTime = nullptr;
 	float* deltaTime = nullptr;
+	EntityManager* entityManager = nullptr;
 };
 
 #endif

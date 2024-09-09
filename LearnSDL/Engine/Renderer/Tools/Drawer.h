@@ -9,11 +9,12 @@
 
 // Systems
 
-#include "../Engine/Entity/Entity.h"
+#include "../Engine/Systems/Entity/Entity.h"
 
 // Utilities
 
 #include "../Engine/Utilities/Enum/KeyPress.h"
+#include "../Engine/Utilities/Enum/Color.h"
 
 // GLM
 
@@ -42,7 +43,7 @@ public:
 
     void initializeSquareVAO();
 
-    void DrawSquare(SDL_Window* gWindow, Entity player);
+    void DrawSquare(Entity player, Color color, glm::vec2 scale);
 
     void EndDraw();
 

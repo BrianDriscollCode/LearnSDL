@@ -60,6 +60,18 @@ float* ReferenceHelper::GetDeltaTime()
 	return Instance().deltaTime;
 }
 
+// Register and manager EntityManager
+
+void ReferenceHelper::RegisterEntityManager(EntityManager* entityManager)
+{
+	Instance().entityManager = entityManager;
+}
+
+EntityManager* ReferenceHelper::GetEntityManager()
+{
+	return Instance().entityManager;
+}
+
 // The Instance
 
 ReferenceHelper& ReferenceHelper::Instance()

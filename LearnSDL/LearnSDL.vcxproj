@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\Entity\Entity.cpp" />
-    <ClCompile Include="Engine\Entity\EntityManager.cpp" />
+    <ClCompile Include="Engine\Systems\Entity\Entity.cpp" />
+    <ClCompile Include="Engine\Systems\Entity\EntityManager.cpp" />
+    <ClCompile Include="Engine\Physics\Collisions\CollisionHandler.cpp" />
     <ClCompile Include="Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h" />
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp" />
@@ -46,12 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
-    <ClInclude Include="Engine\Entity\Entity.h" />
-    <ClInclude Include="Engine\Entity\EntityManager.h" />
+    <ClInclude Include="Engine\Systems\Entity\Entity.h" />
+    <ClInclude Include="Engine\Systems\Entity\EntityManager.h" />
+    <ClInclude Include="Engine\Physics\Collisions\CollisionHandler.h" />
     <ClInclude Include="Engine\Renderer\Renderer.h" />
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
+    <ClInclude Include="Engine\Utilities\Enum\Color.h" />
     <ClInclude Include="Engine\Utilities\Helper\ReferenceHelper.h" />
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />
     <ClInclude Include="Engine\Systems\Managers\SubEmitEventManager.h" />
@@ -68,6 +71,7 @@
   <ItemGroup>
     <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.frag" />
     <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.vert" />
+    <Text Include="Engine\Systems\Entity\EntityNotes.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

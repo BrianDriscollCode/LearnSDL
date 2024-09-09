@@ -13,7 +13,7 @@
 
 
 Renderer::Renderer(SDL_Window* gWindowRef)
-	: debugOutput(true), drawer(true, gWindowRef), gWindow(gWindowRef)
+	: debugOutput(true), drawer(true, gWindowRef)
 {
     // Set the attributes for OpenGL
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -30,15 +30,11 @@ Renderer::Renderer(SDL_Window* gWindowRef)
 void Renderer::Init()
 {  
     drawer.initializeSquareVAO();
-    //shader = std::make_unique<Shader>("./Engine/Renderer/Shaders/Resources/BasicSquare.vert", "./Engine/Renderer/Shaders/Resources/BasicSquare.frag");
-    
-    debugOutput.outputGreenText("Start Render");
     debugOutput.outputGreenText("**SUCCESS**::INITIALIZERENDERER::BUFFERSLOADED::[Engine/Renderer/InitializeRenderer.h]");
 }
 
 void Renderer::TerminateRenderer()
 {
     drawer.DeleteDrawer();
-
     debugOutput.outputGreenText("**SUCCESS**::TERMINATERENDERER::CLOSING::[Engine/Renderer/InitializeRenderer.h]");
 }

@@ -75,10 +75,10 @@
     <ClCompile Include="Engine\Renderer\Tools\Resources\ShapeLibrary.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Entity\Entity.cpp">
+    <ClCompile Include="Engine\Systems\Entity\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Entity\EntityManager.cpp">
+    <ClCompile Include="Engine\Systems\Entity\EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Utilities\Helper\ReferenceHelper.cpp">
@@ -88,6 +88,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Project\Game\Player\RegularBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Physics\Collisions\CollisionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,10 +137,10 @@
     <ClInclude Include="Project\Game\Player\PlayerMovementInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Entity\Entity.h">
+    <ClInclude Include="Engine\Systems\Entity\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Entity\EntityManager.h">
+    <ClInclude Include="Engine\Systems\Entity\EntityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utilities\Helper\ReferenceHelper.h">
@@ -149,9 +152,16 @@
     <ClInclude Include="Project\Game\Player\RegularBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Utilities\Enum\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Physics\Collisions\CollisionHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.frag" />
     <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.vert" />
+    <Text Include="Engine\Systems\Entity\EntityNotes.txt" />
   </ItemGroup>
 </Project>
