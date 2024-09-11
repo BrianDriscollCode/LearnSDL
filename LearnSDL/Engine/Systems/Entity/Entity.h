@@ -11,6 +11,7 @@
 
 // Utilities
 #include "../Engine/Utilities/Enum/KeyPress.h"
+#include "../Engine/Utilities/Enum/BoxCollision.h"
 
 
 class Entity
@@ -22,7 +23,7 @@ public:
 
 	Entity(glm::vec3 startPosition);
 
-	void MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY);
+	void MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirection);
 	//void RegisterSelfToEntityManager();
 	//void update(float deltaTime);
 };

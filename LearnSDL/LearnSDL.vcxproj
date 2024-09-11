@@ -54,6 +54,7 @@
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
     <ClInclude Include="Engine\Systems\Handlers\SetControlsHandler.h" />
+    <ClInclude Include="Engine\Utilities\Enum\BoxCollision.h" />
     <ClInclude Include="Engine\Utilities\Enum\Color.h" />
     <ClInclude Include="Engine\Utilities\Helper\ReferenceHelper.h" />
     <ClInclude Include="Engine\Systems\Managers\CallbackEventManager.h" />

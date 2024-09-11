@@ -221,10 +221,10 @@ int main(int argc, char* args[]) {
 		{
 			warmupFrames--;
 		}
-		else if (frameTime < targetFrameTime) 
+		/*else if (frameTime < targetFrameTime) 
 		{
 			SDL_Delay(targetFrameTime - frameTime);
-		}
+		}*/
 
 		// Calculate and display FPS
 		if (showFPS)

@@ -18,6 +18,7 @@
 
 // Utilities
 #include "../Engine/Utilities/Enum/Color.h"
+#include "../Engine/Utilities/Enum/BoxCollision.h"
 
 class Player
 {
@@ -27,6 +28,8 @@ public:
 	DebugOutput debugOutput;
 	PlayerMovementInput playerMovementInput;
 	EntityManager* entityManager;
+
+	BoxCollision collisionDirection = NO_COL;
 
 	void Tick();
 

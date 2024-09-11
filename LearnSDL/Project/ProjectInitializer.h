@@ -1,7 +1,12 @@
 #ifndef PROJECTINITIALIZER_H
 #define PROJECTINITIALIZER_H
 
+
+// External Libraries
 #include <SDL.h>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 // Systems
 #include "../Engine/Systems/Handlers/InputHandler.h"
@@ -52,6 +57,7 @@ public:
 
 	// Objects
 	RegularBox regularBox;
+	RegularBox regularBox2;
 
 	void InitializeGameCode();
 	void InPollCode(SDL_Event& eventObject);

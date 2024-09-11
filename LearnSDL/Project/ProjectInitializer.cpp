@@ -15,7 +15,10 @@ ProjectInitializer::ProjectInitializer(
 	renderer(rendererRef),
 	debugOutput(true),
 	playerMovementInput(),
-	gWindow(gWindowRef)
+	gWindow(gWindowRef),
+	player(),
+	regularBox(glm::vec3(0.75f, 0.75f, 0.0f)),
+	regularBox2(glm::vec3(0.25f, 0.25f, 0.0f))
 {
 
 }
@@ -26,6 +29,9 @@ void ProjectInitializer::InitializeGameCode()
 	//inputHandler.setAction(SDLK_UP, [this]() { subEmitEventManager.emit("EnemyKilled", eventObject); });
 	//inputHandler.setAction(SDLK_RIGHT, [this]() { debugOutput.outputYellowText("NONE SET"); });
 	//playerMovement.OnInit();
+	// Example position
+	/*glm::vec3 boxPosition(0.0f, 0.0f, 0.0f);
+	regularBox = RegularBox(boxPosition);*/
 }
 
 void ProjectInitializer::InPollCode(SDL_Event& eventObject)
@@ -47,9 +53,12 @@ void ProjectInitializer::InLoopCode()
 
 	player.Tick();
 	regularBox.Tick();
+	regularBox2.Tick();
 
-	regularBox.DrawSelf();
 	player.DrawSelf();
+	regularBox.DrawSelf();
+	regularBox2.DrawSelf();
+
 	//renderer.drawer.MoveSquare(movementX, movementY);
 }
 

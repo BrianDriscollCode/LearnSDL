@@ -16,7 +16,13 @@ void Player::Tick()
 	float deltaTime = *ReferenceHelper::GetDeltaTime();
 	float alpha = *ReferenceHelper::GetAlphaTime();
 
-	entityManager->GetEntity(uniqueId)->MoveEntity(deltaTime, alpha, playerMovementInput.currentXMovementState, playerMovementInput.currentYMovementState);
+	collisionDirection = entityManager->CalculateDirectionalCollisions(uniqueId);
+	entityManager->GetEntity(uniqueId)->MoveEntity(deltaTime, alpha, playerMovementInput.currentXMovementState, playerMovementInput.currentYMovementState, collisionDirection);
+
+	/*if (isColliding)
+	{
+		printf("Is Colliding");
+	}*/
 }
 
 void Player::DrawSelf()

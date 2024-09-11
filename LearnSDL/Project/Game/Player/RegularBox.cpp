@@ -1,9 +1,9 @@
 #include "RegularBox.h"
 
-RegularBox::RegularBox()
+RegularBox::RegularBox(glm::vec3 initPos)
 	:entityManager(ReferenceHelper::GetEntityManager())
 {
-	uniqueId = entityManager->CreateEntity(glm::vec3(0.5f, 0.5f, 0.0f));
+	uniqueId = entityManager->CreateEntity(initPos);
 }
 
 void RegularBox::Tick()
@@ -17,5 +17,5 @@ void RegularBox::DrawSelf()
 	Renderer* renderer = ReferenceHelper::GetRenderer();
 	Entity& entity = *entityManager->GetEntity(uniqueId);
 
-	renderer->drawer.DrawSquare(entity, RED, glm::vec2(0.25f, 0.25f));
+	renderer->drawer.DrawSquare(entity, RED, glm::vec2(1.0f, 1.0f));
 }

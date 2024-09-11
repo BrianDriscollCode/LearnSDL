@@ -158,6 +158,9 @@
     <ClInclude Include="Engine\Physics\Collisions\CollisionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Utilities\Enum\BoxCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Renderer\Shaders\Resources\BasicSquare.frag" />
