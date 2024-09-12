@@ -23,7 +23,7 @@ public:
 
 	Entity(glm::vec3 startPosition);
 
-	void MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirection);
+	void MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY);
 	//void RegisterSelfToEntityManager();
 	//void update(float deltaTime);
 };

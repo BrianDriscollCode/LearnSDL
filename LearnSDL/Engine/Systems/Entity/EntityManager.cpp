@@ -1,29 +1,45 @@
 #include "EntityManager.h"
 
 EntityManager::EntityManager()
+	: debugOutput(true)
 {
 
 }
 
-BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId)
+BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x, bool y)
 {
 	float collisionRange = .20f;
-	Entity* entity = GetEntity(uniqueId);
 
+	// Gets the entity that called this function
+	// For now, no other functions should insert an uniqueID of an entity which itself isn't
+	Entity* entity = GetEntity(uniqueId); 
+
+	// Loop through all registered entities
 	for (auto it = allEntitiesUnderId.begin(); it != allEntitiesUnderId.end(); it++)
 	{
-		Entity* entityComparator = it->second;
-		int entityComparatorId = it->first;
 
+		Entity* entityComparator = it->second; // gets the entity
+		int entityComparatorId = it->first; // gets the uniqeID
+
+		if (x && y)
+		{
+			debugOutput.outputRedText("ERROR::EntityManager::X and Y Flags Both True::Choose One");
+		}
+
+		// Does not compare to self via UniqueID
 		if (uniqueId != entityComparatorId)
 		{
+			// Calculate distance between objects
 			float distanceX = std::abs(entity->currentPosition.x - entityComparator->currentPosition.x);
 			float distanceY = std::abs(entity->currentPosition.y - entityComparator->currentPosition.y);
 			
+			// if x and y axis are colliding
 			if (distanceX < collisionRange && distanceY < collisionRange)
 			{
 				// Determine the collision side
-				if (distanceX > distanceY)
+
+				// With x bool true
+				if (distanceX > distanceY && x)
 				{
 					if (entity->currentPosition.x < entityComparator->currentPosition.x)
 					{
@@ -37,7 +53,8 @@ BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId)
 					}
 				}
 
-				if (distanceY > distanceX)
+				// with y bool true
+				if (distanceY > distanceX && y)
 				{
 					if (entity->currentPosition.y > entityComparator->currentPosition.y)
 					{
@@ -51,9 +68,6 @@ BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId)
 					}
 				}
 				
-				//printf("Current X collision range: %f\n", distanceX);
-				//printf("Current Y collision range: %f\n", distanceY);
-				return NO_COL;
 			}
 		}
 	}

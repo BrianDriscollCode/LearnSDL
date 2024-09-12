@@ -17,8 +17,9 @@ ProjectInitializer::ProjectInitializer(
 	playerMovementInput(),
 	gWindow(gWindowRef),
 	player(),
-	regularBox(glm::vec3(0.75f, 0.75f, 0.0f)),
-	regularBox2(glm::vec3(0.25f, 0.25f, 0.0f))
+	regularBox(glm::vec3(0.55f, 0.80f, 0.0f)),
+	regularBox2(glm::vec3(0.75f, 0.55f, 0.0f)),
+	regularBox3(glm::vec3(0.55f, 0.30f, 0.0f))
 {
 
 }
@@ -54,10 +55,12 @@ void ProjectInitializer::InLoopCode()
 	player.Tick();
 	regularBox.Tick();
 	regularBox2.Tick();
+	regularBox3.Tick();
 
 	player.DrawSelf();
 	regularBox.DrawSelf();
 	regularBox2.DrawSelf();
+	regularBox3.DrawSelf();
 
 	//renderer.drawer.MoveSquare(movementX, movementY);
 }

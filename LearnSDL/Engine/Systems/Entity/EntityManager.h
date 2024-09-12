@@ -21,6 +21,7 @@
 
 // Utilities
 #include "../Engine/Utilities/Enum/BoxCollision.h"
+#include "../Engine/Debug/DebugOutput.h"
 
 
 class Entity;
@@ -34,10 +35,11 @@ public:
 	int CreateEntity(glm::vec3 position);
 
 	void RegisterEntity(EntityType type, int uniqueId, Entity* entity);
-	BoxCollision CalculateDirectionalCollisions(int UniqueId);
+	BoxCollision CalculateDirectionalCollisions(int UniqueId, bool x, bool y);
 
 
 	Entity* GetEntity(int uniqueId);
+	DebugOutput debugOutput;
 
 private:
 	std::unordered_map<EntityType, std::vector<Entity*>> allEntitiesUnderType;

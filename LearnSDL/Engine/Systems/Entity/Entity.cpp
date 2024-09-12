@@ -8,25 +8,25 @@ Entity::Entity(glm::vec3 startPosition)
 	currentPosition = startPosition;
 }
 
-void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirection)
+void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY)
 {
 
 	prevPosition = currentPosition;
 
-	if (directionX == RIGHT && collisionDirection != RIGHT_COL)
+	if (directionX == RIGHT && collisionDirectionX != RIGHT_COL)
 	{
 		currentPosition.x += 1.0f * deltaTime;
 	}
-	else if (directionX == LEFT && collisionDirection != LEFT_COL)
+	else if (directionX == LEFT && collisionDirectionX != LEFT_COL)
 	{
 		currentPosition.x -= 1.0f * deltaTime;
 	}
 
-	if (directionY == UP && collisionDirection != TOP_COL)
+	if (directionY == UP && collisionDirectionY != TOP_COL)
 	{
 		currentPosition.y += 1.0f * deltaTime;
 	}
-	else if (directionY == DOWN && collisionDirection != BOTTOM_COL)
+	else if (directionY == DOWN && collisionDirectionY != BOTTOM_COL)
 	{
 		currentPosition.y -= 1.0f * deltaTime;
 	}

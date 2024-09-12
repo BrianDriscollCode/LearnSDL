@@ -29,8 +29,9 @@ public:
 	PlayerMovementInput playerMovementInput;
 	EntityManager* entityManager;
 
-	BoxCollision collisionDirection = NO_COL;
-
+	BoxCollision collisionDirectionX = NO_COL;
+	BoxCollision collisionDirectionY = NO_COL;
+ 
 	void Tick();
 
 	void DrawSelf();

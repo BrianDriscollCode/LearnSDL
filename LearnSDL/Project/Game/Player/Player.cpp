@@ -16,8 +16,13 @@ void Player::Tick()
 	float deltaTime = *ReferenceHelper::GetDeltaTime();
 	float alpha = *ReferenceHelper::GetAlphaTime();
 
-	collisionDirection = entityManager->CalculateDirectionalCollisions(uniqueId);
-	entityManager->GetEntity(uniqueId)->MoveEntity(deltaTime, alpha, playerMovementInput.currentXMovementState, playerMovementInput.currentYMovementState, collisionDirection);
+	collisionDirectionX = entityManager->CalculateDirectionalCollisions(uniqueId, true, false);
+	collisionDirectionY = entityManager->CalculateDirectionalCollisions(uniqueId, false, true);
+
+	//printf("x: " + collisionDirectionX);
+	//printf("y: " + collisionDirectionY);
+
+	entityManager->GetEntity(uniqueId)->MoveEntity(deltaTime, alpha, playerMovementInput.currentXMovementState, playerMovementInput.currentYMovementState, collisionDirectionX, collisionDirectionY);
 
 	/*if (isColliding)
 	{

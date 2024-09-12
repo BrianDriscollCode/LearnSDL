@@ -58,6 +58,7 @@ public:
 	// Objects
 	RegularBox regularBox;
 	RegularBox regularBox2;
+	RegularBox regularBox3;
 
 	void InitializeGameCode();
 	void InPollCode(SDL_Event& eventObject);
