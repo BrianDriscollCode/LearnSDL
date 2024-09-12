@@ -6,9 +6,10 @@ EntityManager::EntityManager()
 
 }
 
-BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x, bool y)
+BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x, bool y, float collisionSize)
 {
-	float collisionRange = .20f;
+	float collisionRangeX = collisionSize;
+	float collisionRangeY = collisionSize;
 
 	// Gets the entity that called this function
 	// For now, no other functions should insert an uniqueID of an entity which itself isn't
@@ -30,11 +31,14 @@ BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x,
 		if (uniqueId != entityComparatorId)
 		{
 			// Calculate distance between objects
-			float distanceX = std::abs(entity->currentPosition.x - entityComparator->currentPosition.x);
-			float distanceY = std::abs(entity->currentPosition.y - entityComparator->currentPosition.y);
+			float distanceX = std::round(std::abs(entity->currentPosition.x - entityComparator->currentPosition.x) * 100) / 100;
+			float distanceY = std::round(std::abs(entity->currentPosition.y - entityComparator->currentPosition.y) * 100) / 100;
+			
+			//printf("distanceX: %.2f\n", distanceX);
+			//printf("distanceY: %.2f\n", distanceY);
 			
 			// if x and y axis are colliding
-			if (distanceX < collisionRange && distanceY < collisionRange)
+			if (distanceX < collisionRangeX && distanceY < collisionRangeY)
 			{
 				// Determine the collision side
 
@@ -43,12 +47,12 @@ BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x,
 				{
 					if (entity->currentPosition.x < entityComparator->currentPosition.x)
 					{
-						printf("Collision on the right side\n");
+						//printf("Collision on the right side\n");
 						return RIGHT_COL;
 					}
 					else
 					{
-						printf("Collision on the left side\n");
+						//printf("Collision on the left side\n");
 						return LEFT_COL;
 					}
 				}
@@ -58,12 +62,12 @@ BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x,
 				{
 					if (entity->currentPosition.y > entityComparator->currentPosition.y)
 					{
-						printf("Collision on the bottom side\n");
+						//printf("Collision on the bottom side\n");
 						return BOTTOM_COL;
 					}
 					else
 					{
-						printf("Collision on the top side\n");
+						//printf("Collision on the top side\n");
 						return TOP_COL;
 					}
 				}

@@ -31,6 +31,9 @@ public:
 
 	BoxCollision collisionDirectionX = NO_COL;
 	BoxCollision collisionDirectionY = NO_COL;
+
+	float size;
+	float collisionSize;
  
 	void Tick();
 

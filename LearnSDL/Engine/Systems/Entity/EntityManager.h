@@ -35,7 +35,7 @@ public:
 	int CreateEntity(glm::vec3 position);
 
 	void RegisterEntity(EntityType type, int uniqueId, Entity* entity);
-	BoxCollision CalculateDirectionalCollisions(int UniqueId, bool x, bool y);
+	BoxCollision CalculateDirectionalCollisions(int UniqueId, bool x, bool y, float collisionSize);
 
 
 	Entity* GetEntity(int uniqueId);

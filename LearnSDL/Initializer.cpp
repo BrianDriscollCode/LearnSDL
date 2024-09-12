@@ -190,10 +190,12 @@ int main(int argc, char* args[]) {
 		}
 
 		glClear(GL_COLOR_BUFFER_BIT);
+
 		// Game update logic
 		projectInitializer.InLoopCode();
+
+		// Entities draw themselves in the projectInitializer loop code, this ends that process
 		renderer.drawer.EndDraw();
-		// Clear the color buffer
 			
 
 		// End frame timing
