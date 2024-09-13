@@ -1,9 +1,11 @@
 #include "RegularBox.h"
 
 RegularBox::RegularBox(glm::vec3 initPos)
-	:entityManager(ReferenceHelper::GetEntityManager())
+	:entityManager(ReferenceHelper::GetEntityManager()), entity()
 {
-	uniqueId = entityManager->CreateEntity(initPos);
+	entity.InitEntity(glm::vec3(0.75f, 0.55f, 0.0f));
+	entityManager->RegisterEntity(std::string("enemy"), &entity);
+	//uniqueId = entityManager->CreateEntity(initPos);
 }
 
 void RegularBox::Tick()
@@ -13,9 +15,7 @@ void RegularBox::Tick()
 
 void RegularBox::DrawSelf()
 {
-	SDL_Window* gWindow = ReferenceHelper::GetWindow();
 	Renderer* renderer = ReferenceHelper::GetRenderer();
-	Entity& entity = *entityManager->GetEntity(uniqueId);
 
 	renderer->drawer.DrawSquare(entity, RED, glm::vec2(1.0f, 1.0f));
 }

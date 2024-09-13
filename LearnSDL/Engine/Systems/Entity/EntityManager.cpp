@@ -6,89 +6,11 @@ EntityManager::EntityManager()
 
 }
 
-BoxCollision EntityManager::CalculateDirectionalCollisions(int uniqueId, bool x, bool y, float collisionSize)
+int EntityManager::RegisterEntity(EntityType type, Entity* entity)
 {
-	float collisionRangeX = collisionSize;
-	float collisionRangeY = collisionSize;
-
-	// Gets the entity that called this function
-	// For now, no other functions should insert an uniqueID of an entity which itself isn't
-	Entity* entity = GetEntity(uniqueId); 
-
-	// Loop through all registered entities
-	for (auto it = allEntitiesUnderId.begin(); it != allEntitiesUnderId.end(); it++)
-	{
-
-		Entity* entityComparator = it->second; // gets the entity
-		int entityComparatorId = it->first; // gets the uniqeID
-
-		if (x && y)
-		{
-			debugOutput.outputRedText("ERROR::EntityManager::X and Y Flags Both True::Choose One");
-		}
-
-		// Does not compare to self via UniqueID
-		if (uniqueId != entityComparatorId)
-		{
-			// Calculate distance between objects
-			float distanceX = std::round(std::abs(entity->currentPosition.x - entityComparator->currentPosition.x) * 100) / 100;
-			float distanceY = std::round(std::abs(entity->currentPosition.y - entityComparator->currentPosition.y) * 100) / 100;
-			
-			//printf("distanceX: %.2f\n", distanceX);
-			//printf("distanceY: %.2f\n", distanceY);
-			
-			// if x and y axis are colliding
-			if (distanceX < collisionRangeX && distanceY < collisionRangeY)
-			{
-				// Determine the collision side
-
-				// With x bool true
-				if (distanceX > distanceY && x)
-				{
-					if (entity->currentPosition.x < entityComparator->currentPosition.x)
-					{
-						//printf("Collision on the right side\n");
-						return RIGHT_COL;
-					}
-					else
-					{
-						//printf("Collision on the left side\n");
-						return LEFT_COL;
-					}
-				}
-
-				// with y bool true
-				if (distanceY > distanceX && y)
-				{
-					if (entity->currentPosition.y > entityComparator->currentPosition.y)
-					{
-						//printf("Collision on the bottom side\n");
-						return BOTTOM_COL;
-					}
-					else
-					{
-						//printf("Collision on the top side\n");
-						return TOP_COL;
-					}
-				}
-				
-			}
-		}
-	}
-	return NO_COL;
-}
-
-void EntityManager::RegisterEntity(EntityType type, int uniqueId, Entity* entity)
-{
+	uniqueId++;
 	allEntitiesUnderType[type].push_back(entity);
 	allEntitiesUnderId[uniqueId] = entity;
-}
-
-int EntityManager::CreateEntity(glm::vec3 position)
-{
-	Entity* newEntity = new Entity(position);
-	uniqueId++;
-	RegisterEntity(std::string("Enemy"), uniqueId, newEntity);
 	return uniqueId;
 }
 
@@ -99,8 +21,12 @@ Entity* EntityManager::GetEntity(int uniqueId)
 	{
 		return it->second; // Return the first entity in the vector
 	}
-	return nullptr; 
+	return nullptr;
 }
 
+std::unordered_map<int, Entity*>* EntityManager::GetAllEntities()
+{
+	return &allEntitiesUnderId;
+}
 
 

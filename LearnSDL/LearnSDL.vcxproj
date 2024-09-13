@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Engine\Systems\Entity\Entity.cpp" />
     <ClCompile Include="Engine\Systems\Entity\EntityManager.cpp" />
-    <ClCompile Include="Engine\Physics\Collisions\CollisionHandler.cpp" />
+    <ClCompile Include="Engine\Physics\Collisions\CollisionBox.cpp" />
     <ClCompile Include="Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h" />
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp" />
@@ -42,6 +42,7 @@
     <ClCompile Include="LeftOver.cpp" />
     <ClCompile Include="Project\Game\Player\Player.cpp" />
     <ClCompile Include="Project\Game\Player\PlayerMovementInput.cpp" />
+    <ClCompile Include="Project\Game\Player\PlayerV2.cpp" />
     <ClCompile Include="Project\Game\Player\RegularBox.cpp" />
     <ClCompile Include="Project\ProjectInitializer.cpp" />
   </ItemGroup>
@@ -49,7 +50,7 @@
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
     <ClInclude Include="Engine\Systems\Entity\Entity.h" />
     <ClInclude Include="Engine\Systems\Entity\EntityManager.h" />
-    <ClInclude Include="Engine\Physics\Collisions\CollisionHandler.h" />
+    <ClInclude Include="Engine\Physics\Collisions\CollisionBox.h" />
     <ClInclude Include="Engine\Renderer\Renderer.h" />
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />
@@ -66,6 +67,7 @@
     <ClInclude Include="Engine\Systems\Loaders\SurfaceLoader.h" />
     <ClInclude Include="Project\Game\Player\Player.h" />
     <ClInclude Include="Project\Game\Player\PlayerMovementInput.h" />
+    <ClInclude Include="Project\Game\Player\PlayerV2.h" />
     <ClInclude Include="Project\Game\Player\RegularBox.h" />
     <ClInclude Include="Project\ProjectInitializer.h" />
   </ItemGroup>

@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 #include "../Engine/Renderer/Renderer.h"
-//#include "../Engine/Systems/Entity/EntityManager.h"
+#include "../Engine/Systems/Entity/EntityManager.h"
 
 // How to get this reference helper easily passable, with references into project code?
 class ReferenceHelper

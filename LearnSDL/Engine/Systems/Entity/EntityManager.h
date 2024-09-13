@@ -32,10 +32,10 @@ class EntityManager
 {
 public:
 	EntityManager();
-	int CreateEntity(glm::vec3 position);
+	//int CreateEntity(glm::vec3 position);
 
-	void RegisterEntity(EntityType type, int uniqueId, Entity* entity);
-	BoxCollision CalculateDirectionalCollisions(int UniqueId, bool x, bool y, float collisionSize);
+	std::unordered_map<int, Entity*>* GetAllEntities();
+	int RegisterEntity(EntityType type, Entity* entity);
 
 
 	Entity* GetEntity(int uniqueId);
@@ -43,7 +43,6 @@ public:
 
 private:
 	std::unordered_map<EntityType, std::vector<Entity*>> allEntitiesUnderType;
-	//std::unordered_map<int, std::vector<Entity*>> allEntitiesUnderId;
 	std::unordered_map<int, Entity*> allEntitiesUnderId;
 	int uniqueId = 0;
 };

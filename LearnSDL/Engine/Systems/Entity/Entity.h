@@ -6,9 +6,6 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-// Engine Systems
-#include "EntityManager.h"
-
 // Utilities
 #include "../Engine/Utilities/Enum/KeyPress.h"
 #include "../Engine/Utilities/Enum/BoxCollision.h"
@@ -21,8 +18,9 @@ public:
 	glm::vec3 currentPosition;
 	glm::vec3 prevPosition;
 
-	Entity(glm::vec3 startPosition);
+	Entity();
 
+	void InitEntity(glm::vec3 startPosition);
 	void MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY);
 	//void RegisterSelfToEntityManager();
 	//void update(float deltaTime);

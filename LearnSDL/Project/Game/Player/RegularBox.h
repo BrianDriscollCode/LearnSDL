@@ -19,6 +19,7 @@ class RegularBox
 public:
 	RegularBox(glm::vec3 initPos);
 	EntityManager* entityManager;
+	Entity entity;
 
 	int uniqueId;
 

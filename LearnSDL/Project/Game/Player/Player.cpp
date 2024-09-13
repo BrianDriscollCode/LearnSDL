@@ -4,7 +4,7 @@
 Player::Player()
 	: entityManager(ReferenceHelper::GetEntityManager()), debugOutput(true), playerMovementInput()
 {
-	uniqueId = entityManager->CreateEntity(glm::vec3(0.0f, 0.0f, 0.0f));
+	//uniqueId = entityManager->CreateEntity(glm::vec3(0.0f, 0.0f, 0.0f));
 	size = 1.0f; // defines square size
 	collisionSize = (size / 5.0f) + 0.01f; // defines collision boundaries calculated by experimentation
 }
@@ -18,8 +18,8 @@ void Player::Tick()
 	float deltaTime = *ReferenceHelper::GetDeltaTime();
 	float alpha = *ReferenceHelper::GetAlphaTime();
 
-	collisionDirectionX = entityManager->CalculateDirectionalCollisions(uniqueId, true, false, collisionSize);
-	collisionDirectionY = entityManager->CalculateDirectionalCollisions(uniqueId, false, true, collisionSize);
+	//collisionDirectionX = entityManager->CalculateDirectionalCollisions(uniqueId, true, false, collisionSize);
+	//collisionDirectionY = entityManager->CalculateDirectionalCollisions(uniqueId, false, true, collisionSize);
 
 	//printf("x: " + collisionDirectionX);
 	//printf("y: " + collisionDirectionY);

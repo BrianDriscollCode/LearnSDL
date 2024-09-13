@@ -90,7 +90,10 @@
     <ClCompile Include="Project\Game\Player\RegularBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Physics\Collisions\CollisionHandler.cpp">
+    <ClCompile Include="Engine\Physics\Collisions\CollisionBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\Player\PlayerV2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,10 +158,13 @@
     <ClInclude Include="Engine\Utilities\Enum\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Physics\Collisions\CollisionHandler.h">
+    <ClInclude Include="Engine\Physics\Collisions\CollisionBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utilities\Enum\BoxCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\Player\PlayerV2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

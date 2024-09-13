@@ -2,10 +2,17 @@
 #include "Entity.h"
 #include <iostream>
 
-Entity::Entity(glm::vec3 startPosition)
+Entity::Entity()
+{
+
+}
+
+void Entity::InitEntity(glm::vec3 startPosition)
 {
 	actualPosition = startPosition;
 	currentPosition = startPosition;
+
+
 }
 
 void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY)
