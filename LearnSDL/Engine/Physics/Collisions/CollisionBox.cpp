@@ -34,23 +34,32 @@ BoxCollision CollisionBox::CalculateDirectionalCollisionX(std::unordered_map<int
         float entityComparatorTop = entityComparator->currentPosition.y + (entityComparator->size.y / 2.0f);
         float entityComparatorBottom = entityComparator->currentPosition.y - (entityComparator->size.y / 2.0f);
 
+        // Calculate collision with the precision of 0.001f
         const float epsilon = 0.001f; 
         bool rightCol = (entityRight >= entityComparatorLeft || fabs(entityRight - entityComparatorLeft) < epsilon);
         bool leftCol = (entityLeft <= entityComparatorRight || fabs(entityLeft - entityComparatorRight) < epsilon);
         bool topCol = (entityTop >= entityComparatorBottom || fabs(entityTop - entityComparatorBottom) < epsilon); 
         bool bottomCol = (entityBottom <= entityComparatorTop || fabs(entityBottom - entityComparatorTop) < epsilon); 
 
+        // Check for overlap
         bool xOverlap = rightCol && leftCol;
         bool yOverlap = topCol && bottomCol;
 
+        // If x and y axis overlap, then is colliding
         bool isColliding = xOverlap && yOverlap;
 
+        // Get distances for x or y axis collision check (so both collisions don't active at same time for a single object)
         float currentDistanceX = (std::round(std::abs(entity->currentPosition.x - entityComparator->currentPosition.x) * 100) / 100);
         float currentDistanceY = (std::round(std::abs(entity->currentPosition.y - entityComparator->currentPosition.y) * 100) / 100);
 
         // If both X and Y overlap, a collision has occurred
         if (xOverlap && yOverlap)
         {
+            if (printCounter % 4 == 0)
+            {
+                printf("currentDistanceX: %f\n", currentDistanceX);
+                printf("currentDistanceY: %f\n", currentDistanceY);
+            }
 
             if (currentDistanceX > currentDistanceY)
             {
@@ -96,34 +105,45 @@ BoxCollision CollisionBox::CalculateDirectionalCollisionY(std::unordered_map<int
         float entityComparatorTop = entityComparator->currentPosition.y + (entityComparator->size.y / 2.0f);
         float entityComparatorBottom = entityComparator->currentPosition.y - (entityComparator->size.y / 2.0f);
 
+        // Calculate collision with the precision of 0.001f
         const float epsilon = 0.001f;
         bool rightCol = (entityRight >= entityComparatorLeft || fabs(entityRight - entityComparatorLeft) < epsilon);
         bool leftCol = (entityLeft <= entityComparatorRight || fabs(entityLeft - entityComparatorRight) < epsilon);
         bool topCol = (entityTop >= entityComparatorBottom || fabs(entityTop - entityComparatorBottom) < epsilon); 
         bool bottomCol = (entityBottom <= entityComparatorTop || fabs(entityBottom - entityComparatorTop) < epsilon); 
 
+        // Check for overlap
         bool xOverlap = rightCol && leftCol;
         bool yOverlap = topCol && bottomCol;
 
+        // If x and y axis overlap, then is colliding
         bool isColliding = xOverlap && yOverlap;
        
+        // Get distances for x or y axis collision check (so both collisions don't active at same time for a single object)
         float currentDistanceX = (std::round(std::abs(entity->currentPosition.x - entityComparator->currentPosition.x) * 100) / 100);
         float currentDistanceY = (std::round(std::abs(entity->currentPosition.y - entityComparator->currentPosition.y) * 100) / 100);
 
         // If both X and Y overlap, a collision has occurred
         if (isColliding)
         {
-            if (currentDistanceY > currentDistanceX) 
+            // Fixes tunneling edge case, instead of moving through when currentDistances are the same, 
+            // we bias toward the y axis
+            if (currentDistanceX == currentDistanceY)
+            {
+                currentDistanceY += 0.01f;
+            }
+            // Check if should be a top or bottom collision
+            if (currentDistanceY > currentDistanceX)
             {
                 // Further logic to determine collision direction
                 if (entity->currentPosition.y < entityComparator->currentPosition.y)
                 {
-                    entity->currentPosition.y = std::min(entity->currentPosition.y, entityComparatorTop - entity->size.y / 2.0f);
+                    entity->currentPosition.y = std::min(entity->currentPosition.y,  entityComparatorBottom - entity->size.y / 2.0f);
                     return TOP_COL;
                 }
                 else
                 {
-                    entity->currentPosition.y = std::max(entity->currentPosition.y, entityComparatorBottom + entity->size.y / 2.0f);
+                    entity->currentPosition.y = std::max(entity->currentPosition.y, entityComparatorTop + entity->size.y / 2.0f);
                     return BOTTOM_COL;
                 }
             }
@@ -157,6 +177,7 @@ bool CollisionBox::TriggerCollision(std::unordered_map<int, Entity*>* allEntitie
         float entityComparatorTop = entityComparator->currentPosition.y + (entityComparator->size.y / 2.0f);
         float entityComparatorBottom = entityComparator->currentPosition.y - (entityComparator->size.y / 2.0f);
 
+        // check above code for ref comments if need explanation
         const float epsilon = 0.001f;
         bool rightCol = (entityRight >= entityComparatorLeft || fabs(entityRight - entityComparatorLeft) < epsilon);
         bool leftCol = (entityLeft <= entityComparatorRight || fabs(entityLeft - entityComparatorRight) < epsilon);

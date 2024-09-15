@@ -19,7 +19,7 @@ ProjectInitializer::ProjectInitializer(
 	player(),
 	regularBox(glm::vec3(0.50f, 0.50f, 0.0f), glm::vec2(.20f, .20f)),
 	regularBox2(glm::vec3(0.25f, 0.25f, 0.0f), glm::vec2(.20f, .20f)),
-	regularBox3(glm::vec3(-0.50f, -0.50f, 0.0f), glm::vec2(.40f, .40f))
+	regularBox3(glm::vec3(-0.50f, -0.50f, 0.0f), glm::vec2(.35f, .35f))
 {
 
 }

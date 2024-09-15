@@ -19,6 +19,7 @@ public:
 	float sizeY;
 	
 	CollisionTypeSelector collisionType;
+	int printCounter = 0;
 
 	void InitCollisionBox(float sizeXRef, float sizeYRef);
 	BoxCollision CalculateDirectionalCollisionX(std::unordered_map<int, Entity*>* allEntitiesUnderId, Entity* entity, int uniqueId);
