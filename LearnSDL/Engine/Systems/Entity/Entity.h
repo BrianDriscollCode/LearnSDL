@@ -17,13 +17,12 @@ public:
 	glm::vec3 actualPosition;
 	glm::vec3 currentPosition;
 	glm::vec3 prevPosition;
+	glm::vec2 size;
 
 	Entity();
 
-	void InitEntity(glm::vec3 startPosition);
+	void InitEntity(glm::vec3 startPosition, glm::vec2 initSize);
 	void MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY);
-	//void RegisterSelfToEntityManager();
-	//void update(float deltaTime);
 };
 
 #endif

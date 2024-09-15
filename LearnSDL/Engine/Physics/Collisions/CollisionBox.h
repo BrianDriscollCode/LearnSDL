@@ -8,6 +8,7 @@
 
 // Utilities
 #include "../Engine/Utilities/Enum/BoxCollision.h"
+#include "../Engine/Utilities/Enum/CollisionTypeSelector.h"
 
 class CollisionBox
 {
@@ -16,12 +17,14 @@ public:
 
 	float sizeX;
 	float sizeY;
-	float collisionSizeX;
-	float collisionSizeY;
+	
+	CollisionTypeSelector collisionType;
 
-	void InitCollisionBox(float sizeX, float sizeY);
+	void InitCollisionBox(float sizeXRef, float sizeYRef);
 	BoxCollision CalculateDirectionalCollisionX(std::unordered_map<int, Entity*>* allEntitiesUnderId, Entity* entity, int uniqueId);
 	BoxCollision CalculateDirectionalCollisionY(std::unordered_map<int, Entity*>* allEntitiesUnderId, Entity* entity, int uniqueId);
+
+	bool TriggerCollision(std::unordered_map<int, Entity*>* allEntitiesUnderId, Entity* entity, int uniqueId);
 };
 
 #endif

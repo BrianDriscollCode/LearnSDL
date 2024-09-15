@@ -32,11 +32,9 @@ class EntityManager
 {
 public:
 	EntityManager();
-	//int CreateEntity(glm::vec3 position);
 
 	std::unordered_map<int, Entity*>* GetAllEntities();
 	int RegisterEntity(EntityType type, Entity* entity);
-
 
 	Entity* GetEntity(int uniqueId);
 	DebugOutput debugOutput;

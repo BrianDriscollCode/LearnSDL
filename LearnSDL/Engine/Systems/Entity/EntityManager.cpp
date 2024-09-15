@@ -6,6 +6,8 @@ EntityManager::EntityManager()
 
 }
 
+// Register entity and Set UniqueId with entity and on calling object
+// Example: Player Class calls "RegisterEntity" and receives uniqueID
 int EntityManager::RegisterEntity(EntityType type, Entity* entity)
 {
 	uniqueId++;

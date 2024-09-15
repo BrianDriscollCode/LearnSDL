@@ -93,7 +93,7 @@
     <ClCompile Include="Engine\Physics\Collisions\CollisionBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Game\Player\PlayerV2.cpp">
+    <ClCompile Include="Engine\Utilities\Enum\CollisionTypeSelector.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -162,9 +162,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utilities\Enum\BoxCollision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Game\Player\PlayerV2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

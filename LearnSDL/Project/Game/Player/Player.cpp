@@ -1,12 +1,25 @@
 #include "Player.h"
-#include <string>
 
 Player::Player()
-	: entityManager(ReferenceHelper::GetEntityManager()), debugOutput(true), playerMovementInput()
+	:	debugOutput(true),
+		playerMovementInput(),
+		entityManager(ReferenceHelper::GetEntityManager()),
+		entity(),
+		collisionBox()
 {
-	//uniqueId = entityManager->CreateEntity(glm::vec3(0.0f, 0.0f, 0.0f));
-	size = 1.0f; // defines square size
-	collisionSize = (size / 5.0f) + 0.01f; // defines collision boundaries calculated by experimentation
+	// Start position
+	initStartPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+	
+	// Size of collision box
+	sizeX = 0.20f;
+	sizeY = 0.20f;
+
+	// Initialize Entity
+	entity.InitEntity(initStartPosition, glm::vec2(sizeX, sizeY));
+	uniqueId = entityManager->RegisterEntity(std::string("Player"), &entity);
+
+	// Initialize Collision Box
+	collisionBox.InitCollisionBox(sizeX, sizeY);
 }
 
 void Player::Tick()
@@ -14,29 +27,24 @@ void Player::Tick()
 	// Connect to states for movement and input
 	playerMovementInput.MoveInput();
 
-	// move player across screen using interpolation and GLM
+	// deltatime and alpha for movement interpolation
 	float deltaTime = *ReferenceHelper::GetDeltaTime();
 	float alpha = *ReferenceHelper::GetAlphaTime();
 
-	//collisionDirectionX = entityManager->CalculateDirectionalCollisions(uniqueId, true, false, collisionSize);
-	//collisionDirectionY = entityManager->CalculateDirectionalCollisions(uniqueId, false, true, collisionSize);
+	//Check x and y axis for collisions
+	collisionDirectionX = collisionBox.CalculateDirectionalCollisionX(entityManager->GetAllEntities(), &entity, uniqueId);
+	collisionDirectionY = collisionBox.CalculateDirectionalCollisionY(entityManager->GetAllEntities(), &entity, uniqueId);
 
-	//printf("x: " + collisionDirectionX);
-	//printf("y: " + collisionDirectionY);
+	// Get Movement State
+	currentXMovementState = playerMovementInput.currentXMovementState;
+	currentYMovementState = playerMovementInput.currentYMovementState;
 
-	entityManager->GetEntity(uniqueId)->MoveEntity(deltaTime, alpha, playerMovementInput.currentXMovementState, playerMovementInput.currentYMovementState, collisionDirectionX, collisionDirectionY);
-
-	/*if (isColliding)
-	{
-		printf("Is Colliding");
-	}*/
+	// Move Entity
+	entity.MoveEntity(deltaTime, alpha, currentXMovementState, currentYMovementState, collisionDirectionX, collisionDirectionY);
 }
 
 void Player::DrawSelf()
 {
 	Renderer* renderer = ReferenceHelper::GetRenderer();
-	Entity& entity = *entityManager->GetEntity(uniqueId);
-
-	renderer->drawer.DrawSquare(entity, GREEN, glm::vec2(size, size));
+	renderer->drawer.DrawSquare(entity, GREEN, glm::vec2(sizeX, sizeY));
 }
-

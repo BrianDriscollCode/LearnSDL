@@ -21,7 +21,6 @@
 // Game Scripts
 #include "../Project/Game/Player/PlayerMovementInput.h"
 #include "../Project/Game/Player/Player.h"
-#include "../Project/Game/Player/PlayerV2.h"
 #include "../Project/Game/Player/RegularBox.h"
 
 // Utilities
@@ -54,14 +53,13 @@ public:
 	DebugOutput debugOutput;
 
 	// Player
-	//Player player;
-	PlayerV2 playerV2;
+	Player player;
 	
 
 	// Objects
 	RegularBox regularBox;
-	//RegularBox regularBox2;
-	//RegularBox regularBox3;
+	RegularBox regularBox2;
+	RegularBox regularBox3;
 
 	void InitializeGameCode();
 	void InPollCode(SDL_Event& eventObject);

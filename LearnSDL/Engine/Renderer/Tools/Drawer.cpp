@@ -15,10 +15,10 @@ void Drawer::initializeSquareVAO() {
 
     // Initialize member variables
     GLfloat vertices[] = {
-        -0.1f,  0.1f, 0.0f,  // Top-left
-        -0.1f, -0.1f, 0.0f,  // Bottom-left
-         0.1f, -0.1f, 0.0f,  // Bottom-right
-         0.1f,  0.1f, 0.0f   // Top-right
+    -0.5f,  0.5f, 0.0f,  // Top-left
+    -0.5f, -0.5f, 0.0f,  // Bottom-left
+     0.5f, -0.5f, 0.0f,  // Bottom-right
+     0.5f,  0.5f, 0.0f   // Top-right
     };
 
     GLuint indices[] = {
@@ -57,7 +57,7 @@ void Drawer::DrawSquare(Entity entity, Color color, glm::vec2 scale)
 
     // Movement and scaling
     model = glm::translate(model, entity.actualPosition);
-    model = glm::scale(model, glm::vec3(scale, 1.0f));
+    model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
 
     // Choose Color
 

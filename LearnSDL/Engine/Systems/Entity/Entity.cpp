@@ -2,24 +2,22 @@
 #include "Entity.h"
 #include <iostream>
 
-Entity::Entity()
-{
+Entity::Entity() {}
 
-}
-
-void Entity::InitEntity(glm::vec3 startPosition)
+void Entity::InitEntity(glm::vec3 startPosition, glm::vec2 initSize)
 {
 	actualPosition = startPosition;
 	currentPosition = startPosition;
-
-
+	size = initSize;
 }
 
 void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY)
 {
 
+	// set prev position for interpolation
 	prevPosition = currentPosition;
 
+	// move entity
 	if (directionX == RIGHT && collisionDirectionX != RIGHT_COL)
 	{
 		currentPosition.x += 1.0f * deltaTime;
@@ -38,17 +36,12 @@ void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPr
 		currentPosition.y -= 1.0f * deltaTime;
 	}
 
-	//std::cout << "DeltaTime: " << deltaTime << std::endl;
+	// movement interpolation with formula
 	actualPosition.x = prevPosition.x + alpha * (currentPosition.x - prevPosition.x);
 	actualPosition.y = prevPosition.y + alpha * (currentPosition.y - prevPosition.y);
+	// Debug output for positions and deltas
 }
 
-//void Entity::RegisterSelfToEntityManager()
-//{
-//	EntityManager* entityManager = ReferenceHelper::GetEntityManager();
-//	entityManager->RegisterEntity(std::string("object"), this);
-//	
-//}
 
 
 
