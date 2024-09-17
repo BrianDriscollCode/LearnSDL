@@ -5,21 +5,24 @@ Player::Player()
 		playerMovementInput(),
 		entityManager(ReferenceHelper::GetEntityManager()),
 		entity(),
-		collisionBox()
+		collisionHandler()
 {
 	// Start position
 	initStartPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 	
-	// Size of collision box
+	// Size of drawing and collision
 	sizeX = 0.20f;
 	sizeY = 0.20f;
+	collisionSizeX = 0.20f;
+	collisionSizeY = 0.20f;
+
 
 	// Initialize Entity
-	entity.InitEntity(initStartPosition, glm::vec2(sizeX, sizeY));
+	entity.InitEntity(initStartPosition, glm::vec2(sizeX, sizeY), glm::vec2(collisionSizeX, collisionSizeY), CollisionTypeSelector::PHYSICS);
 	uniqueId = entityManager->RegisterEntity(std::string("Player"), &entity);
 
 	// Initialize Collision Box
-	collisionBox.InitCollisionBox(sizeX, sizeY);
+	collisionHandler.InitCollisionBox(collisionSizeX, collisionSizeY);
 }
 
 void Player::Tick()
@@ -32,8 +35,8 @@ void Player::Tick()
 	float alpha = *ReferenceHelper::GetAlphaTime();
 
 	//Check x and y axis for collisions
-	collisionDirectionX = collisionBox.CalculateDirectionalCollisionX(entityManager->GetAllEntities(), &entity, uniqueId);
-	collisionDirectionY = collisionBox.CalculateDirectionalCollisionY(entityManager->GetAllEntities(), &entity, uniqueId);
+	collisionDirectionX = collisionHandler.CalculateDirectionalCollisionX(entityManager->GetAllEntities(), &entity, uniqueId);
+	collisionDirectionY = collisionHandler.CalculateDirectionalCollisionY(entityManager->GetAllEntities(), &entity, uniqueId);
 
 	// Get Movement State
 	currentXMovementState = playerMovementInput.currentXMovementState;

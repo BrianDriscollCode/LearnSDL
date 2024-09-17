@@ -13,15 +13,18 @@
 
 // Utilities
 #include "../Engine/Utilities/Enum/Color.h"
+#include "../Engine//Utilities/Enum/CollisionTypeSelector.h"
 
 class RegularBox
 {
 public:
-	RegularBox(glm::vec3 initPos, glm::vec2 size);
+	RegularBox(glm::vec3 initPos, glm::vec2 size, glm::vec2 collisionSize);
 	EntityManager* entityManager;
 	Entity entity;
 	float sizeX; 
 	float sizeY;
+	float collisionSizeX;
+	float collisionSizeY;
 
 	int uniqueId;
 

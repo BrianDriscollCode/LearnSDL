@@ -4,11 +4,14 @@
 
 Entity::Entity() {}
 
-void Entity::InitEntity(glm::vec3 startPosition, glm::vec2 initSize)
+void Entity::InitEntity(glm::vec3 startPosition, glm::vec2 initSize, glm::vec2 initCollisionSize, CollisionTypeSelector collisionType)
 {
 	actualPosition = startPosition;
 	currentPosition = startPosition;
 	size = initSize;
+	collisionSize = initCollisionSize;
+
+	collisionBox.InitCollisionBox(glm::vec2(collisionSize.x, collisionSize.y), collisionType);
 }
 
 void Entity::MoveEntity(float deltaTime, float alpha, KeyPress directionX, KeyPress directionY, BoxCollision collisionDirectionX, BoxCollision collisionDirectionY)

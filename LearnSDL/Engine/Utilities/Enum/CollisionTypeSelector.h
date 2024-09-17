@@ -4,7 +4,8 @@
 enum class CollisionTypeSelector
 {
     PHYSICS,
-    TRIGGER
+    TRIGGER,
+    NONE
 };
 
 #endif 

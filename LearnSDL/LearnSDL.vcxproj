@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Physics\Collisions\CollisionBox.cpp" />
     <ClCompile Include="Engine\Systems\Entity\Entity.cpp" />
     <ClCompile Include="Engine\Systems\Entity\EntityManager.cpp" />
-    <ClCompile Include="Engine\Physics\Collisions\CollisionBox.cpp" />
+    <ClCompile Include="Engine\Physics\Collisions\CollisionHandler.cpp" />
     <ClCompile Include="Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Renderer\Shaders\Shader.h" />
     <ClCompile Include="Engine\Renderer\Tools\Drawer.cpp" />
@@ -48,9 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Debug\DebugOutput.h" />
+    <ClInclude Include="Engine\Physics\Collisions\CollisionBox.h" />
     <ClInclude Include="Engine\Systems\Entity\Entity.h" />
     <ClInclude Include="Engine\Systems\Entity\EntityManager.h" />
-    <ClInclude Include="Engine\Physics\Collisions\CollisionBox.h" />
+    <ClInclude Include="Engine\Physics\Collisions\CollisionHandler.h" />
     <ClInclude Include="Engine\Renderer\Renderer.h" />
     <ClInclude Include="Engine\Renderer\Tools\Drawer.h" />
     <ClInclude Include="Engine\Systems\Handlers\InputHandler.h" />

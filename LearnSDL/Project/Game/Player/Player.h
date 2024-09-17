@@ -8,7 +8,7 @@
 
 // Engine Systems
 #include "../Engine/Systems/Entity/Entity.h"
-#include "../Engine/Physics/Collisions/CollisionBox.h"
+#include "../Engine/Physics/Collisions/CollisionHandler.h"
 #include "../Engine/Utilities/Helper/ReferenceHelper.h"
 #include "../Engine/Renderer/Renderer.h"
 #include "../Engine/Debug/DebugOutput.h"
@@ -30,7 +30,7 @@ public:
 	DebugOutput debugOutput;
 	PlayerMovementInput playerMovementInput;
 	Entity entity;
-	CollisionBox collisionBox;
+	CollisionHandler collisionHandler;
 	EntityManager* entityManager;
 
 	BoxCollision collisionDirectionX = NO_COL;
@@ -42,6 +42,8 @@ public:
 	int uniqueId;
 	float sizeX;
 	float sizeY;
+	float collisionSizeX;
+	float collisionSizeY;
 	glm::vec3 initStartPosition;
 
 	void Tick();
